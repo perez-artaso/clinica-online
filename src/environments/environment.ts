@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    config: {
+      
+      apiKey: "AIzaSyBu0UWac_fMX9wK9L6BWzPqksQRmZWOOl8",
+      authDomain: "clinica-online-d5138.firebaseapp.com",
+      projectId: "clinica-online-d5138",
+      storageBucket: "clinica-online-d5138.appspot.com",
+      messagingSenderId: "480975514604",
+      appId: "1:480975514604:web:5e9fbecec64899d2782ec9"
+      
+    }
+  }
 };
 
 /*
