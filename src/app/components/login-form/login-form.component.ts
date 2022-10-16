@@ -67,11 +67,6 @@ export class LoginFormComponent implements OnInit {
     );
   }
 
-  access() {
-    this._email = "test_user@rayoespacial.com";
-    this._password = "123456";
-  }
-
   RequiredFieldsFilled(): boolean {
 
     if (this._email == "") {
