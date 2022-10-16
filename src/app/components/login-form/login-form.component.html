@@ -13,7 +13,7 @@
             </div>
 
             <button class="w-100 btn btn-lg btn-primary mt-4 submit-customization" (click)="this.login()">Ingresar</button>
-            <button class="w-100 btn btn-lg btn-primary mt-1 access-btn-customization">Registro</button>
+            <button class="w-100 btn btn-lg btn-primary mt-1 register-btn-customization" (click)="this.registerRequest()">Registro</button>
 
             <div class="alert alert-danger mt-5" role="alert" *ngIf="this.errors.HasError()">
                 <p class="m-0" *ngIf="this.errors.INVALID_EMAIL.ocurred"> {{this.errors.INVALID_EMAIL.message}} </p>

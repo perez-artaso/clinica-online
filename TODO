@@ -1,0 +1,4 @@
+- crear clases "Patient", "Specialist" y "Admin" (heredan de User)
+
+- crear componente "Register"
+    * varía en base a la opción que se seleccione de tipo de usuario (paciente, especialista)

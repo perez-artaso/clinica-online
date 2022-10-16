@@ -12,10 +12,18 @@
     display: none;
 }
 
-.form-container {
-    margin: 10vh 0;
-}
-
 .row {
     --bs-gutter-x: 0rem !important;
+}
+
+.form-container {
+    margin-top: 0vh;
+}
+
+@media (min-width: 768px) {
+
+    .form-container {
+        margin: auto 0;
+    }
+
 }

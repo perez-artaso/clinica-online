@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { LoginErrors } from 'src/app/models/login-errors';
@@ -15,6 +15,8 @@ export class LoginFormComponent implements OnInit {
   _password: string = "";
 
   errors: LoginErrors = new LoginErrors();
+
+  @Output('registerRequest') registerEmitter: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -79,6 +81,10 @@ export class LoginFormComponent implements OnInit {
 
     return true;
 
+  }
+
+  registerRequest() {
+    this.registerEmitter.emit();
   }
 
 
