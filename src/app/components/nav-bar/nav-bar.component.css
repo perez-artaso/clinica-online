@@ -1,0 +1,17 @@
+.navbar-customization {
+    background-color:  #ffffff !important;
+    border-bottom: .1rem solid #0D0F45 !important;
+    height: 8vh !important;
+}
+
+.nav-link-customization {
+    color: #000000;
+}
+
+.active {
+    color: #000000 !important;
+}
+
+.navbar-toggler {
+    background-color: #000000;
+}

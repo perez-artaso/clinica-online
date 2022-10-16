@@ -1,0 +1,20 @@
+.full-page {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+#image-board {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0 !important;
+}
+
+.form-container {
+    margin: 10vh 0;
+}
+
+.row {
+    --bs-gutter-x: 0rem !important;
+}

@@ -1,0 +1,30 @@
+<div class="login-container text-center">
+    <main class="form-signin w-100 m-auto">
+        <form>
+            <img class="mb-4" src="../../../assets/logo-grande.png" alt="" width="200" height="200">
+
+            <div class="form-floating">
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="this._email">
+            <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="this._password">
+            <label for="floatingPassword">Password</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary mt-4 submit-customization" (click)="this.login()">Ingresar</button>
+            <button class="w-100 btn btn-lg btn-primary mt-1 access-btn-customization" (click)="this.access()">Acceso Rápido</button>
+
+            <div class="alert alert-danger mt-5" role="alert" *ngIf="this.errors.HasError()">
+                <p class="m-0" *ngIf="this.errors.INVALID_EMAIL.ocurred"> {{this.errors.INVALID_EMAIL.message}} </p>
+                <p class="m-0" *ngIf="this.errors.WRONG_PASSWORD.ocurred"> {{this.errors.WRONG_PASSWORD.message}} </p>
+                <p class="m-0" *ngIf="this.errors.USER_NOT_FOUND.ocurred"> {{this.errors.USER_NOT_FOUND.message}} </p>
+                <p class="m-0" *ngIf="this.errors.EMAIL_REQUIRED.ocurred"> {{this.errors.EMAIL_REQUIRED.message}} </p>
+                <p class="m-0" *ngIf="this.errors.PASSWORD_REQUIRED.ocurred"> {{this.errors.PASSWORD_REQUIRED.message}} </p>
+                <p class="m-0" *ngIf="this.errors.OTHER.ocurred"> {{this.errors.OTHER.message}} </p>
+            </div>
+
+            <p class="mt-5 mb-3 text-muted">&copy; Ignacio Perez Artaso - 2022</p>
+        </form>
+    </main>    
+</div>

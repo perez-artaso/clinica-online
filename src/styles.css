@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --light: #38ABAB;
+    --dark: #214F4F;
+}
+
+@font-face {
+    font-family: kodchasan-regular;
+    src: url(./fonts/Kodchasan-Regular.ttf);
+}
+
+@font-face {
+    font-family: kodchasan-italic;
+    src: url(./fonts/Kodchasan-Italic.ttf);
+}
+
+@font-face {
+    font-family: kodchasan-bold;
+    src: url(./fonts/Kodchasan-Bold.ttf);
+}
+
+html, body {
+    background-color: var(--main-color);
+    color: var(--dark) !important;
+    font-family: kodchasan-regular !important;
+}
