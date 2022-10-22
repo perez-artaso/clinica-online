@@ -17,6 +17,10 @@ export class User {
         this._idNumber = idNumber;
     }
 
+    getId() {
+        return this._id;
+    }
+
     getEmail(): string {
         return this._email;
     }

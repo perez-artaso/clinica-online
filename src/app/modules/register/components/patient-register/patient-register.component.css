@@ -1,0 +1,11 @@
+.form-section {
+    background-color: var(--dark);
+    color: white
+}
+
+.lg-form-btn {
+    width: 100% !important;
+    background-color: var(--light);
+    color: white;
+    font-size: calc(1.275rem + .3vw);
+}
