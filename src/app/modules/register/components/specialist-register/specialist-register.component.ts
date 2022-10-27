@@ -5,6 +5,7 @@ import { ProfileImages } from 'src/app/models/profile-images';
 import { SpecialistProfile } from 'src/app/models/specialist-profile';
 import { ProfileImagesService } from 'src/app/services/profile-images.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { Speciality } from '../../models/speciality';
 import { RegisterService } from '../../services/register.service';
 
 @Component({
@@ -17,6 +18,8 @@ export class SpecialistRegisterComponent implements OnInit {
   @Output('onExit') exitEmitter: EventEmitter<void> = new EventEmitter<void>();
 
   base64FirstImage: string = '';
+
+  showSpecialities: boolean = false;
 
   newUserForm: FormGroup = new FormGroup(
     {
@@ -35,11 +38,12 @@ export class SpecialistRegisterComponent implements OnInit {
   constructor(private register: RegisterService, private profiles: ProfileService, private profileImages: ProfileImagesService) { }
 
   ngOnInit(): void {
+    this.newUserForm.controls['speciality'].disable();
   }
 
   submit() {
     this.register.NewUser(
-      "ygxwugvkfwssosjhln@tmmcv.net", "123456"
+      this.newUserForm.get('email')?.value, this.newUserForm.get('password')?.value
     ).then(
      async () => {
 
@@ -48,14 +52,14 @@ export class SpecialistRegisterComponent implements OnInit {
         this.profiles.addDocument(
           new SpecialistProfile(
             user_id, 
-            "Roberto",
-            "Morales",
-            64,
-            "12.134.213",
-            "ygxwugvkfwssosjhln@tmmcv.net",
+            this.newUserForm.get('name')?.value,
+            this.newUserForm.get('last_name')?.value,
+            this.newUserForm.get('age')?.value,
+            this.newUserForm.get('id_number')?.value,
+            this.newUserForm.get('email')?.value,
             1,
             0,
-            "Dentista"
+            this.newUserForm.get('speciality')?.value
           ).getLiteralObjectRepresentation()
         );
 
@@ -70,8 +74,14 @@ export class SpecialistRegisterComponent implements OnInit {
 
         this.register.VerifyUser();
 
+        this.exit();
+
       }
     )
+  }
+
+  addSpeciality() {
+    this.showSpecialities = true;
   }
 
   firstImageSubmitted(event: any) {
@@ -90,6 +100,12 @@ export class SpecialistRegisterComponent implements OnInit {
       }
     }
     return result;
+  }
+
+  receiveSpeciality(speciality: Speciality) {
+    this.showSpecialities = false;
+    this.newUserForm.get('speciality')?.setValue(speciality.name);
+    console.log(speciality.name);
   }
 
   exit() {

@@ -1,0 +1,31 @@
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-8">
+            <app-patient-register *ngIf="this.newPatient" (onExit)="this.exit()"></app-patient-register>
+            <app-specialist-register *ngIf="this.newSpecialist" (onExit)="this.exit()"></app-specialist-register>
+            <app-admin-register *ngIf="this.newAdmin" (onExit)="this.exit()"></app-admin-register>
+        </div>
+
+        <div class="col-4">
+
+            <h1>Opciones</h1>
+
+            <div id="options-container">
+                <div (click)="this.newPatient = true ; this.newSpecialist = false ; this.newAdmin = false" class="alert alert-info">
+                    Nuevo Paciente
+                </div>
+                <div (click)="this.newPatient = false; this.newSpecialist = true ; this.newAdmin = false" class="alert alert-info">
+                    Nuevo Especialista
+                </div>
+                <div (click)="this.newPatient = false ; this.newSpecialist = false ; this.newAdmin = true" class="alert alert-info">
+                    Nuevo Administrador
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+
+</div>

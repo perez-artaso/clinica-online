@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, Event as NavigationEvent , NavigationStart, NavigationEnd } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-welcome',
@@ -10,11 +11,13 @@ export class WelcomeComponent implements OnInit {
 
   showRegisterForm: boolean = false;
 
-  constructor(private router: Router) { 
-   
-  }
+  specialistForm: boolean = false;
+  patientForm: boolean = true;
+
+  constructor(private router: Router, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    this.initLoadingIndicator();
   }
 
   registerRequested() {
@@ -23,6 +26,24 @@ export class WelcomeComponent implements OnInit {
 
   exitRegisterForm() {
     this.showRegisterForm = false;
+  }
+
+  initLoadingIndicator() {
+
+    this.router.events.subscribe(
+
+      (event: NavigationEvent) => {
+
+        if(event instanceof NavigationStart) {
+          this.loadingService.loadingStart();
+        } else if (event instanceof NavigationEnd) {
+          this.loadingService.loadingEnd();
+        }
+
+      }
+      
+    );
+
   }
 
 }

@@ -17,6 +17,7 @@ import { RandomBgImageDirective } from './directives/random-bg-image.directive';
 import { RegisterModule } from './modules/register/register.module';
 import { BadgeComponent } from './components/badge/badge.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     WelcomeComponent,
     RandomBgImageDirective,
     BadgeComponent,
-    LoadingComponent
+    LoadingComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

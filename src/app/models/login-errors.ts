@@ -8,6 +8,7 @@ export class LoginErrors {
     EMAIL_REQUIRED: IUserError;
     PASSWORD_REQUIRED: IUserError;
     EMAIL_NOT_VERIFIED: IUserError;
+    SPECIALIST_NOT_APPROVED: IUserError;
     OTHER: IUserError;
 
     constructor () {
@@ -40,6 +41,11 @@ export class LoginErrors {
         this.EMAIL_NOT_VERIFIED = {
             ocurred: false,
             message: "El email no ha sido verificado."
+        };
+
+        this.SPECIALIST_NOT_APPROVED = {
+            ocurred: false,
+            message: "Su perfil de especialista aún no fue aprobado por nuestros administradores."
         };
 
         this.OTHER = {

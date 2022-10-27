@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     background-color:white;
+    position: relative;
   }
   
   .form-signin {
@@ -43,4 +44,36 @@
   .register-btn-customization:active {
     background-color: var(--light) !important;
     transform: scale(.95);
+  }
+
+  #quick_access_options {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+  }
+
+  #quick_access {
+    position: absolute;
+    top: 3rem;
+    left: 2rem;
+    z-index: 80;
+    height: 80%;
+    width: 12rem;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transform: translateX(-120%);
+    transition: all 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  .quick_access_reveal {
+    transform: translateX(0%) !important;
+  }
+
+  app-badge {
+    width: 4rem;
+    height: 4rem;
   }

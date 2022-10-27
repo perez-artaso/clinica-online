@@ -1,0 +1,16 @@
+#options-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    border: solid var(--dark) 1px;
+    border-radius: 5px;
+    padding: 3rem;
+}
+
+.alert:hover {
+    cursor: pointer;
+}
+
+.alert:active {
+    transform: scale(.9);
+}

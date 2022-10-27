@@ -41,7 +41,7 @@ export class PatientRegisterComponent implements OnInit {
 
   submit() {
     this.register.NewUser(
-      "ygxwugvkfwssosjhln@tmmcv.net", "123456"
+      this.newUserForm.get("email")?.value, this.newUserForm.get("password")?.value 
     ).then(
      async () => {
 
@@ -50,11 +50,11 @@ export class PatientRegisterComponent implements OnInit {
         this.profiles.addDocument(
           new Profile(
             user_id, 
-            "Carlos",
-            "Beraldi",
-            32,
-            "37.123.223",
-            "ygxwugvkfwssosjhln@tmmcv.net",
+            this.newUserForm.get("name")?.value,
+            this.newUserForm.get("last_name")?.value,
+            this.newUserForm.get("age")?.value,
+            this.newUserForm.get("id_number")?.value,
+            this.newUserForm.get("email")?.value,
             0
           ).getLiteralObjectRepresentation()
         );
@@ -70,6 +70,8 @@ export class PatientRegisterComponent implements OnInit {
         );
 
         this.register.VerifyUser();
+
+        this.exit();
 
       }
     )

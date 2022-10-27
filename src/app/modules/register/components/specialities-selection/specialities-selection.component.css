@@ -1,0 +1,77 @@
+.speciality-selector-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.speciality-selector {
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 60vw;
+    height: 80vh;
+    background-color: rgba(255,255,255,1);
+    overflow-y: scroll;
+}
+
+#speciality-pool {
+    display: flex;
+    justify-content:baseline;
+    flex-wrap: wrap;
+}
+
+.speciality {
+    border-radius: 5px;
+    padding: .5rem;
+    background-color: var(--light);
+    margin: 1rem;
+    font-size: xx-large;
+    min-width: 30%;
+}
+
+.speciality:hover {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    transform: scale(1.01);
+    font-weight: bolder;
+}
+
+#new-speciality-label {
+    padding: 1.5rem;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    margin: 3rem 2rem 0rem 2rem;
+    font-size: large;
+}
+
+#new-speciality {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    margin: .2rem 2rem 3rem 2rem;
+}
+
+input {
+    width: 80%;
+}
+
+#new-speciality-btn {
+    background-color: var(--dark);
+    color: white;
+    max-width: 25%;
+}
+
+@media (max-width: 780px) {
+    .speciality-selector {
+        width: 90vw;
+        height: 80vh;
+    }
+}

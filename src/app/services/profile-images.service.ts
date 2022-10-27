@@ -31,6 +31,8 @@ export class ProfileImagesService {
     return this.loginLogsCollection.doc(documentId).delete();
   }
 
-
+  public getImagesByUID(uid: string): any {
+    return this.firestore.collection(this.collectionPath, ref => ref.where("uid", "==", uid)).valueChanges({idField: 'id'});
+  }
 
 }

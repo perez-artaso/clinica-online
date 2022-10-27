@@ -3,9 +3,8 @@
     background-color: red;
     width: 100%;
     height: 100%;
-    border-radius: 100%;
+    border-radius: 5px;
     box-shadow: .2rem .2rem #888888;
-    background-image: url('../../../assets/micara.webp');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

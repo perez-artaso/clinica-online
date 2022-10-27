@@ -1,6 +1,8 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 :root {
-    --light: #38ABAB;
-    --dark: #214F4F;
+    --light: rgb(56, 171, 171);
+    --dark: rgb(33, 79, 79);
 }
 
 @font-face {
@@ -23,3 +25,4 @@ html, body {
     color: var(--dark) !important;
     font-family: kodchasan-regular !important;
 }
+

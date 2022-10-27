@@ -11,7 +11,13 @@
             <ng-template #registerForm> 
 
                 <div class="register-form"> 
-                   <app-patient-register (onExit)="exitRegisterForm()"></app-patient-register>
+                   <app-patient-register *ngIf="this.patientForm" (onExit)="exitRegisterForm()"></app-patient-register>
+                   <app-specialist-register *ngIf="!this.patientForm" (onExit)="exitRegisterForm()"></app-specialist-register>
+                </div>
+
+                <div style="height: 6rem; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                    <app-badge style="width: 25%; height: 5rem;margin-bottom: 1rem;" [img_url]="'assets/nuevo-paciente.png'" (click)="this.patientForm=true;"></app-badge>
+                    <app-badge style="width: 25%; height: 5rem;" [img_url]="'assets/nuevo-especialista.png'" (click)="this.patientForm=false;"></app-badge>
                 </div>
 
             </ng-template>

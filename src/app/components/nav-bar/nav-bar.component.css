@@ -15,3 +15,7 @@
 .navbar-toggler {
     background-color: #000000;
 }
+
+li:hover {
+    cursor: pointer;
+}

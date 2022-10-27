@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+
+        <div id="approved" class="col-6">
+            <h1>Aprobados</h1>
+            <div (click)="this.block_specialist(approved_specialist)" *ngFor="let approved_specialist of this.approved_specialists" class="alert alert-success">
+                <p style="font-weight: bold;">{{ approved_specialist.name + " " + approved_specialist.last_name }}</p>
+                <p>
+                    {{approved_specialist.speciality}} 
+                </p>
+            </div>
+        </div>
+
+        <div id="not-approved" class="col-6">
+            <h1>Pendientes de aprobación</h1>
+            <div (click)="this.approve_specialist(not_approved_specialist)" *ngFor="let not_approved_specialist of this.not_approved_specialists" class="alert alert-danger">
+                <p style="font-weight: bold;">{{ not_approved_specialist.name + " " + not_approved_specialist.last_name }}</p>
+                <p>
+                    {{not_approved_specialist.speciality}} 
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
