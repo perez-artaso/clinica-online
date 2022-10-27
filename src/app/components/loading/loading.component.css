@@ -1,0 +1,26 @@
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+p {
+    font-size: large;
+}
+
+img {
+    animation: rotation 4s infinite linear;
+    border-radius: 100%;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -7,13 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  showRegisterForm: boolean = false;
+
+  constructor(private router: Router) { 
+   
+  }
 
   ngOnInit(): void {
   }
 
   registerRequested() {
-    
+    this.showRegisterForm = true;
+  }
+
+  exitRegisterForm() {
+    this.showRegisterForm = false;
   }
 
 }

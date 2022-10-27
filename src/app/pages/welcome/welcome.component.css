@@ -20,10 +20,25 @@
     margin-top: 0vh;
 }
 
-@media (min-width: 768px) {
+.register-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+@media (min-width: 1200px) {
 
     .form-container {
         margin: auto 0;
     }
+
+    .register-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 10rem;
+    }
+
 
 }

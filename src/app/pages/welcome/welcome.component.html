@@ -1,8 +1,21 @@
 <div>
     <div class="row full-page">
 
-        <div class="col-12 col-md-6 form-container ">
-            <app-login-form (registerRequest)="this.registerRequested()"></app-login-form>
+        <div class="col-12 col-md-6 form-container">
+
+            <app-login-form  
+            (registerRequest)="this.registerRequested()"
+            *ngIf="!this.showRegisterForm; else registerForm"
+            ></app-login-form>
+
+            <ng-template #registerForm> 
+
+                <div class="register-form"> 
+                   <app-patient-register (onExit)="exitRegisterForm()"></app-patient-register>
+                </div>
+
+            </ng-template>
+            
         </div>
 
         <div class="col-6 d-md-block" id="image-board" appRandomBgImage></div>

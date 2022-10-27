@@ -28,12 +28,14 @@ export class LoginFormComponent implements OnInit {
     this.auth.Login(this._email, this._password).then(
       (res) => {
 
-
         if ( res.user != null ) {
-          this.auth.SetCurrentUser(res.user);
+          if (res.user.emailVerified) {
+            this.auth.SetCurrentUser(res.user);
+            this.router.navigate(["/home"]);
+          } else {
+            this.errors.EMAIL_NOT_VERIFIED.ocurred = true;
+          }
         }
-
-        this.router.navigate(["/home"]);
 
       }
     ).catch(

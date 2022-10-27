@@ -4,19 +4,7 @@ import { PatientRegisterComponent } from './components/patient-register/patient-
 import { SpecialistRegisterComponent } from './components/specialist-register/specialist-register.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
-      {
-        path: 'patient',
-        component: PatientRegisterComponent
-      },
-      {
-        path: 'specialist',
-        component: SpecialistRegisterComponent
-      }
-    ]
-  }
+  
 ];
 
 @NgModule({

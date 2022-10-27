@@ -9,3 +9,11 @@
     color: white;
     font-size: calc(1.275rem + .3vw);
 }
+
+.exit {
+    background-color: rgb(126, 29, 29);
+}
+
+.new-patient-form {
+    max-height: 100%;
+}

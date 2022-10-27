@@ -14,13 +14,19 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { RandomBgImageDirective } from './directives/random-bg-image.directive';
 
+import { RegisterModule } from './modules/register/register.module';
+import { BadgeComponent } from './components/badge/badge.component';
+import { LoadingComponent } from './components/loading/loading.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     LoginFormComponent,
     WelcomeComponent,
-    RandomBgImageDirective
+    RandomBgImageDirective,
+    BadgeComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,8 @@ import { RandomBgImageDirective } from './directives/random-bg-image.directive';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    RegisterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

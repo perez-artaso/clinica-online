@@ -7,6 +7,7 @@ export class LoginErrors {
     USER_NOT_FOUND: IUserError;
     EMAIL_REQUIRED: IUserError;
     PASSWORD_REQUIRED: IUserError;
+    EMAIL_NOT_VERIFIED: IUserError;
     OTHER: IUserError;
 
     constructor () {
@@ -34,6 +35,11 @@ export class LoginErrors {
         this.PASSWORD_REQUIRED = {
             ocurred: false,
             message: "Contraseña requerida."
+        };
+
+        this.EMAIL_NOT_VERIFIED = {
+            ocurred: false,
+            message: "El email no ha sido verificado."
         };
 
         this.OTHER = {

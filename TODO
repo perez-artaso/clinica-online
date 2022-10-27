@@ -1,8 +1,8 @@
 - Crear página "public-register"
     * varía en base a la opción que se seleccione de tipo de usuario (paciente, especialista)
 
-    * Form Alta Paciente (Componente "new-patient")
-    * Form Alta Especialista (Componente "new-specialist")
+    * Form Alta Paciente (Componente "new-patient") [listo]
+    * Form Alta Especialista (Componente "new-specialist") 
     * Service "RegisterService"
 
     -REGISTRO:
