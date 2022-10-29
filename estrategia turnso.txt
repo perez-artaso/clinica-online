@@ -1,0 +1,5 @@
+empezar por entidad especialista -> con sus dias y horarios.
+dsps cuando querés turno, le preguntás al especialista cuando atiende.
+colección turnos tomados, por especialista. 
+
+hay q ir filtrando, por especialidad, por especialista, por dia y por hora.

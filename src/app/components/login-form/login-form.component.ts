@@ -9,7 +9,6 @@ import { Profile } from 'src/app/models/profile';
 import { ProfileImagesService } from 'src/app/services/profile-images.service';
 import { ProfileImages } from 'src/app/models/profile-images';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/app/models/user';
 import { first } from 'rxjs';
 
 @Component({
@@ -26,7 +25,7 @@ export class LoginFormComponent implements OnInit {
   _revealQuickAccess: boolean = false;
 
   quickAccessButtons: Array<Profile> = [];
-  quickAccessImages: Array<ProfileImages> = []
+  quickAccessImages: Array<ProfileImages> = [];
 
   errors: LoginErrors = new LoginErrors();
 
@@ -40,24 +39,25 @@ export class LoginFormComponent implements OnInit {
 
     if(this.auth.IsUserLoggedIn()) this.router.navigate(['/home']);
 
-    this.profileService.getAdminProfiles().subscribe(
+    this.profileService.getAdminProfiles().pipe(first()).subscribe(
       (s: Array<any>) => {
         this.quickAccessButtons[0] = s[0];
       }
     );
 
-    this.profileService.getSpecialistsProfiles().subscribe(
+    this.profileService.getSpecialistsProfiles().pipe(first()).subscribe(
       (s: Array<any>) => {
         this.quickAccessButtons[1] = s[0];
         this.quickAccessButtons[2] = s[1];
       }
     );
 
-    this.profileService.getPatientProfiles().subscribe(
+    this.profileService.getPatientProfiles().pipe(first()).subscribe(
       (s: Array<any>) => {
         this.quickAccessButtons[3] = s[0];
         this.quickAccessButtons[4] = s[1];
         this.quickAccessButtons[5] = s[2];
+        this.setQuickAccessImages();
       }
     );
 
@@ -188,16 +188,20 @@ export class LoginFormComponent implements OnInit {
 
   setQuickAccessImages() {
 
-    this.quickAccessImages = [];
+    this.quickAccessImages = new Array<ProfileImages>();
 
     this.quickAccessButtons.forEach(
       (profile: Profile) => {
-        this.profileImages.getImagesByUID(profile.uid).subscribe(
+        this.profileImages.getImagesByUID(profile.uid).pipe(first()).subscribe(
           (images: ProfileImages[]) => this.quickAccessImages.push(images[0])
         );
       }
     );
 
+  }
+
+  getBase64ProfileImageByUid(uid: string): ProfileImages {
+    return this.quickAccessImages.filter( pImage => pImage.uid == uid )[0];
   }
 
   setImageUrl(role: number) {
