@@ -1,0 +1,54 @@
+.panel-container {
+
+    width: 95vw;
+    border: var(--dark) solid 1px;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    margin: 2rem auto 2rem auto;
+    
+}
+
+#title {
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+
+}
+
+#appointment-cards-container {
+    width: 100%;
+    margin: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.card-container {
+    width: 30% !important ;
+}
+
+h4 {
+    font-weight: bolder;
+}
+
+.appointment-card-header {
+    margin: 0;
+    padding: .2rem;
+    max-width: 33%;
+    border-radius: 0; 
+}
+
+.appointment-options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+.appointment-option {
+    border-radius: 5px;
+}
+
+app-appointment-card {
+    width: 30% !important;
+}

@@ -5,7 +5,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'welcome', pathMatch: 'full'
+    path: '', redirectTo: 'appointments/panel', pathMatch: 'full'
   },
   {
     path: 'welcome', component: WelcomeComponent
@@ -19,6 +19,9 @@ const routes: Routes = [
   {
     path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
   },
+  {
+    path: 'appointments', loadChildren: () => import('./modules/appointment/appointment.module').then( m => m.AppointmentModule)
+  }
 ];
 
 @NgModule({

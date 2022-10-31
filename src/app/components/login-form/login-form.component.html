@@ -3,7 +3,7 @@
     <button class="btn border rounded" id="quick_access_options" (click)="this.toggleQuickAccessOptions()"><i class="bi bi-list"></i> Acceso Rápido</button>
 
     <div [ngClass]="{'quick_access_reveal': this._revealQuickAccess}" id="quick_access">
-        <app-badge *ngFor="let badge of this.quickAccessButtons; let i = index" [img_url]="this.quickAccessImages[i].images[0]" (click)="this.badgeClicked(badge)"></app-badge>
+        <app-badge *ngFor="let badge of this.quickAccessButtons; let i = index" [img_url]="this.setImageUrl(badge.role)" (click)="this.badgeClicked(badge)"></app-badge>
     </div>
 
     <main class="form-signin w-100 m-auto">

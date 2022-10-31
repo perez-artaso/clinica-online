@@ -10,7 +10,7 @@ export class Profile {
     age: number;
     id_number: string;
 
-    constructor (uid: string = "", name: string = "", last_name: string = "", age: number = 0,  id_number: string = "", user_email: string = "", role: Role) {
+    constructor (uid: string = "", name: string = "", last_name: string = "", age: number = 0,  id_number: string = "", user_email: string = "", role: Role = 0) {
         this.uid = uid;
         this.name = name;
         this.last_name = last_name;
