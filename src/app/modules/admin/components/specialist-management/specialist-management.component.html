@@ -5,8 +5,8 @@
             <h1>Aprobados</h1>
             <div (click)="this.block_specialist(approved_specialist)" *ngFor="let approved_specialist of this.approved_specialists" class="alert alert-success">
                 <p style="font-weight: bold;">{{ approved_specialist.name + " " + approved_specialist.last_name }}</p>
-                <p>
-                    {{approved_specialist.speciality}} 
+                <p *ngFor="let speciality of approved_specialist.specialities">
+                    {{speciality}} 
                 </p>
             </div>
         </div>
@@ -15,8 +15,8 @@
             <h1>Pendientes de aprobación</h1>
             <div (click)="this.approve_specialist(not_approved_specialist)" *ngFor="let not_approved_specialist of this.not_approved_specialists" class="alert alert-danger">
                 <p style="font-weight: bold;">{{ not_approved_specialist.name + " " + not_approved_specialist.last_name }}</p>
-                <p>
-                    {{not_approved_specialist.speciality}} 
+                <p *ngFor="let speciality of not_approved_specialist.specialities">
+                    {{speciality}} 
                 </p>
             </div>
         </div>

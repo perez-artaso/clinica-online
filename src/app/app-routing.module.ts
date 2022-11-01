@@ -5,7 +5,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'appointments/panel', pathMatch: 'full'
+    path: '', redirectTo: 'appointments/new', pathMatch: 'full'
   },
   {
     path: 'welcome', component: WelcomeComponent

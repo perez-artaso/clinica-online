@@ -4,14 +4,14 @@ import { Role } from "./role";
 export class SpecialistProfile extends Profile {
 
     approved: number;
-    speciality: string;
+    specialities: Array<string>;
 
-    constructor ( uid: string = "", name: string = "", last_name: string = "", age: number = 0,  id_number: string = "", user_email: string = "", role: Role, approved: number = 0, speciality: string = "") {
+    constructor ( uid: string = "", name: string = "", last_name: string = "", age: number = 0,  id_number: string = "", user_email: string = "", role: Role = 1, approved: number = 0, specialities: Array<string> = []) {
 
         super (uid, name, last_name, age,  id_number, user_email, role);
 
         this.approved = approved;
-        this.speciality = speciality;
+        this.specialities = specialities;
 
     }
 
@@ -25,8 +25,22 @@ export class SpecialistProfile extends Profile {
             "user_email": this.user_email,
             "role": this.role,
             "approved": this.approved,
-            "speciality": this.speciality
+            "speciality": this.getSpecialitiesLiteralObjectRepresentation()
         }
+    }
+
+    private getSpecialitiesLiteralObjectRepresentation () {
+        
+        let specialitiesArray: any[] = [];
+
+        this.specialities.forEach( (speciality) => {
+            specialitiesArray.push(
+                speciality
+            )
+        });
+
+        return specialitiesArray;
+
     }
 
 }

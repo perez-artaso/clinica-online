@@ -1,0 +1,26 @@
+<div class="panel-container">
+    <h1 id="title">Solicitar Turno</h1>
+
+    <div id="mms-container">
+
+        <div [mms]="this.mms" class="mss">
+            <div class="mss-content">
+                <app-create-appointment-first-step (specialityAndSpecialist)="this.receiveSpecialityAndSpecialist($event)"></app-create-appointment-first-step>
+            </div>
+        </div>
+    
+        <div [mms]="this.mms" class="mss">
+            <div class="mss-content">
+                <div style="height: 20vh; width: 100%; background-color: rgb(206, 116, 116);"></div>
+            </div>
+        </div>
+    
+        <div [mms]="this.mms" class="mss">
+            <div class="mss-content" >
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

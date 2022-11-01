@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PanelComponent } from './components/panel/panel.component';
+import { CreateAppointmentComponent } from './pages/create-appointment/create-appointment.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,10 @@ const routes: Routes = [
       {
         path: 'panel',
         component: PanelComponent
+      },
+      {
+        path: 'new',
+        component: CreateAppointmentComponent
       }
     ]
   }

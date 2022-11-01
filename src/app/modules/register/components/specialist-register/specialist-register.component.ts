@@ -66,7 +66,7 @@ export class SpecialistRegisterComponent implements OnInit {
                 this.newUserForm.get('email')?.value,
                 1,
                 0,
-                this.newUserForm.get('speciality')?.value
+                [this.newUserForm.get('speciality')?.value]
               ).getLiteralObjectRepresentation()
             );
 
@@ -125,7 +125,6 @@ export class SpecialistRegisterComponent implements OnInit {
   receiveSpeciality(speciality: Speciality) {
     this.showSpecialities = false;
     this.newUserForm.get('speciality')?.setValue(speciality.name);
-    console.log(speciality.name);
   }
 
   allHasBeenTouched() {

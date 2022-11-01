@@ -1,0 +1,36 @@
+.panel-container {
+
+    width: 95vw;
+    border: var(--dark) solid 1px;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    margin: 2rem auto 2rem auto;
+    
+}
+
+#title {
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+
+}
+
+#mms-container {
+    width: 90vw;
+    margin: 2.5vw;
+    display: flex;
+    overflow: hidden;
+    padding: 0;
+}
+
+.mss {
+    width: 100%;
+    transition: all 1s ease-in-out;
+}
+
+.mss-content {
+    width: 70vw;
+    margin-right: 10vw;
+    margin-left: 10vw;
+    padding: 0;
+}
