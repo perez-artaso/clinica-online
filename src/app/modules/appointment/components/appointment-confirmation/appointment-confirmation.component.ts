@@ -29,7 +29,7 @@ export class AppointmentConfirmationComponent {
         this.revealSuccessMessage = true;
 
         setTimeout(
-          () => this.router.navigate(['/home']), 2000
+          () => this.router.navigate(['/appointments/panel']), 2000
         );
 
       }      

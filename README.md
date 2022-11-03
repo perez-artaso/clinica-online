@@ -1,27 +1,47 @@
-# ClinicaOnline
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+![Logo](https://clinica-online-f088a.web.app/assets/logo-grande.png)
 
-## Development server
+# Solución web para la gestión de usuarios y turnos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+https://clinica-online-f088a.web.app/welcome 
 
-## Code scaffolding
+Bienvenido a la documentación del sistema de gestión para la ClinaOnline.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Pacientes
 
-## Build
+La siguiente información es relevante para quienes deseen registrarse como pacientes a la plataforma, pudiendo así gestionar su información personal y turnos.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 1) Registro
 
-## Running unit tests
+Para registrarse al sistema, utilize la opción "Registro" en la página principal de nuestro portal (https://clinica-online-f088a.web.app/welcome ).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![Registro](https://firebasestorage.googleapis.com/v0/b/clinica-online-f088a.appspot.com/o/registro.png?alt=media&token=5f36166e-6da2-4fe5-9394-9d7f18c3d108)
 
-## Running end-to-end tests
+Una vez allí, asegúrese de estar ante el formulario para pacientes (ya que también pueden registrarse por esta vía nuestros especialistas).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![NuevoPaciente](https://firebasestorage.googleapis.com/v0/b/clinica-online-f088a.appspot.com/o/nuevo-paciente.png?alt=media&token=dd0a8f69-abe8-437a-bf93-bb23b12e6530)
 
-## Further help
+Una vez registrado, usted deberá verificar su identidad, utilizando el link de verificación por doble factor que deberá llegarle a su cuenta de correo. De no recibirlo, comuníquese directamente con nosotros (consultas@clinicaonline.com.ar).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Sección: "Mis Turnos"
+
+En esta sección usted podrá ver el estado actualizado de todos sus turnos, con las acciones correspondientes que usted pued realizar sobre los mismos (cancelarlos, dejar un comentario respecto a la atención recibida, etc.).
+
+#### Sección: "Sacar Turno"
+
+En esta sección usted podrá solicitar un nuevo turno. Los pasos a seguir son sencillos:
+
+1) Seleccione si usted desea sacar un turno por especialista o por especialidad
+2) Seleccione la especialidad o el especialista, según sea el caso
+3) Elija un día y horario para su atención (los horarios están atados a disponibilidad del especialista)
+4) Confirme su turno
+
+![NuevoTurno](https://firebasestorage.googleapis.com/v0/b/clinica-online-f088a.appspot.com/o/nuevo-turno.gif?alt=media&token=4c2da6da-ee41-4be9-a690-deb25d410b55)
+
+#### Cancelar un turno
+
+Para cancelar un turno, usted debe dirigirse a la sección "Mis Turnos" y marcar la opción "Cancelar" (señalizada con una "X") en la tarjeta del turno correspondiente.
+
+![cancelarTurno](https://firebasestorage.googleapis.com/v0/b/clinica-online-f088a.appspot.com/o/cancelar-turno.gif?alt=media&token=33783cc6-ef0e-4f0a-a650-5f3f4e078e43)
+
+
