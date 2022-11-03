@@ -44,4 +44,4 @@ Para cancelar un turno, usted debe dirigirse a la sección "Mis Turnos" y marcar
 
 ![cTurno](https://firebasestorage.googleapis.com/v0/b/clinica-online-f088a.appspot.com/o/cancelar-turno.gif?alt=media&token=33783cc6-ef0e-4f0a-a650-5f3f4e078e43)
 
-
+ETC.
