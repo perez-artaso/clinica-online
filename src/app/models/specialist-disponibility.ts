@@ -1,8 +1,9 @@
 import { Disponibility } from "./disponibility";
 
 export class SpecialistDisponibility {
+    private id: string = "" 
 
-    constructor ( private id: string = "" , private specialistId: string = "", private disponibilities: Array<Disponibility> = [] ) {
+    constructor (public specialistId: string = "", public disponibilities: Array<Disponibility> = [] ) {
 
     }
 
@@ -24,6 +25,10 @@ export class SpecialistDisponibility {
         });
 
         return disponibilityArray;
+    }
+
+    getDisponibilities(): Array<Disponibility> {
+        return this.disponibilities;
     }
 
 }

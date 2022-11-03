@@ -1,0 +1,16 @@
+.appointment-options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+.appointment-option {
+    border-radius: 5px;
+    font-size: x-large;
+    padding: 0 2rem;
+}
+
+.appointment-option:active {
+    transform: scale(.95);
+}

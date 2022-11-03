@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs';
 import { Appointment } from 'src/app/models/appointment';
+import { DailyDisponibility } from 'src/app/models/daily-disponibility';
+import { Disponibility } from 'src/app/models/disponibility';
 import { MmsState } from 'src/app/models/mms-state';
-import { SpecialistProfile } from 'src/app/models/specialist-profile';
+import { SpecialistDisponibility } from 'src/app/models/specialist-disponibility';
+import { AppointmentService } from 'src/app/services/appointment.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { SpecialistDisponibilityService } from 'src/app/services/specialist-disponibility.service';
 import { ISpecialityAndSpecialist } from '../../models/speciality-and-specialist';
 
 @Component({
@@ -17,26 +23,70 @@ export class CreateAppointmentComponent implements OnInit {
   newAppointment: Appointment = new Appointment();
   dateManager: Date = new Date();
 
-  constructor(private nabvar: NavbarService) { }
+  specialistAppointments: Array<Appointment> = [];
+  specialistDailyDisponibilities: Array<DailyDisponibility> = [];
+
+  specialistFullName: string = "";
+
+  constructor(private nabvar: NavbarService, private appointments: AppointmentService, private disponibilities: SpecialistDisponibilityService, private auth: AuthService) { }
 
   ngOnInit(): void {
+
     this.nabvar.showNavbar();
+
+    let currentUserId = this.auth.GetCurrentUserID();
+
+    if (currentUserId) {
+      this.newAppointment.idPatient = currentUserId;
+    }
+
   }
 
   receiveSpecialityAndSpecialist(specialityAndSpecialist: ISpecialityAndSpecialist) {
     this.newAppointment.idSpecialist = specialityAndSpecialist.specialist.uid;
     this.newAppointment.speciality = specialityAndSpecialist.speciality;
 
-    console.dir(this.newAppointment);
-    this.move(1);
+    this.specialistFullName = specialityAndSpecialist.specialist.name + " " + specialityAndSpecialist.specialist.last_name;
+
+    this.appointments.getAppointmentsBySpecialistId(this.newAppointment.idSpecialist).pipe(first()).subscribe(
+      (a: Appointment[]) => this.specialistAppointments = a
+    );
+    
+    this.disponibilities.getDisponibilitiesByUID(this.newAppointment.idSpecialist).subscribe(
+      (d: SpecialistDisponibility[]) => {
+
+        const dspnblts = (new SpecialistDisponibility(d[0].specialistId, d[0].disponibilities)).getDisponibilities();
+
+        for(let i = 0; i < dspnblts.length; i++) {
+
+          let dspnblt = (new Disponibility(dspnblts[i].specialityName, dspnblts[i].dailyDisponibilities));
+
+          if ( dspnblt.getSpecialityName().toLowerCase() == this.newAppointment.speciality.toLowerCase() ) {
+            this.specialistDailyDisponibilities = dspnblt.getDailyDisponibilities();
+            this.move();
+          }
+
+        }
+
+      }
+    );
+
   }
 
-  move(times: number, mode: string = "f"): void {
+  receiveSelectedDate (date: Date) {
+
+    this.newAppointment.timestamp = date.getTime().toString();
+    this.newAppointment.duration = 30;
+    this.move();
+    
+  }
+
+  move(times: number = 1, mode: string = "f"): void {
 
     if (mode == 'b') {
 
       for(let i = 0; i < times; i++) {
-        this.moveRight();
+        this.moveLeft();
       }
 
     } else {
@@ -55,6 +105,10 @@ export class CreateAppointmentComponent implements OnInit {
 
   moveLeft(): void {
     this.mms = new MmsState(this.mms.elementOnScreen - 1, 90);
+  }
+
+  receiveCancelation() {
+    this.move(2, 'b');
   }
 
 }

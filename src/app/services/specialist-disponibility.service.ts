@@ -31,8 +31,8 @@ export class SpecialistDisponibilityService {
     return this.specialistDisponibilitiesCollection.doc(documentId).delete();
   }
 
-  public getImagesByUID(uid: string): any {
-    return this.firestore.collection(this.collectionPath, ref => ref.where("uid", "==", uid)).valueChanges({idField: 'id'});
+  public getDisponibilitiesByUID(uid: string): any {
+    return this.firestore.collection(this.collectionPath, ref => ref.where("specialistId", "==", uid)).valueChanges({idField: 'id'});
   }
 
 }

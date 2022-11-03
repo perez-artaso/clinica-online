@@ -11,13 +11,22 @@
     
         <div [mms]="this.mms" class="mss">
             <div class="mss-content">
-                <div style="height: 20vh; width: 100%; background-color: rgb(206, 116, 116);"></div>
+                <app-appointment-offer 
+                *ngIf="this.mms.elementOnScreen == 1"
+                [disponibilities]="this.specialistDailyDisponibilities" 
+                [appointments]="this.specialistAppointments"
+                (selectedDate)="this.receiveSelectedDate($event)"
+                ></app-appointment-offer>
             </div>
         </div>
     
         <div [mms]="this.mms" class="mss">
             <div class="mss-content" >
-
+                <app-appointment-confirmation 
+                [appointment]="this.newAppointment"
+                [specialistFullName]="this.specialistFullName"
+                (onCancelation)="this.receiveCancelation()"
+                ></app-appointment-confirmation>
             </div>
         </div>
 

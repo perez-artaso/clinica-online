@@ -1,0 +1,12 @@
+<div *ngIf="this.display" class="row mt-5">
+
+    <div 
+    *ngFor="let offer of this.appointmentOffers"
+    class="alert alert-success col-3 me-2"
+    (click)="this.emmitSelectedDate(offer.timestamp)">
+        <h4 style="font-weight: bold;">{{ this.dates.getDayOfTheWeekNameByTimestamp(offer.timestamp) }}</h4>
+        <div>{{ this.dates.getLocaleDateStringByTimestamp(offer.timestamp) }}</div>
+        <div>{{ this.dates.getLocaleTimeStringByTimestamp(offer.timestamp) }}</div>
+    </div>
+
+</div>

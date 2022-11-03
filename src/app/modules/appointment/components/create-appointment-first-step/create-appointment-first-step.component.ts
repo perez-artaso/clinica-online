@@ -139,6 +139,7 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
     }
 
     this.specialistEmitter.emit(specialistAndSpeciality);
+    this.hideAll();
 
   }
 
@@ -168,6 +169,13 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
     this.showSpecialities = false;
     this.showSpecialistsBySpeciality = false;
     this.showSpecialitiesBySpecialist = true;
+  }
+
+  hideAll() {
+    this.showSpecialists = false;
+    this.showSpecialities = false;
+    this.showSpecialistsBySpeciality = false;
+    this.showSpecialitiesBySpecialist = false;
   }
 
 }

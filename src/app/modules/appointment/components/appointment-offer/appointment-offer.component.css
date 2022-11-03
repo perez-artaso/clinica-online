@@ -1,0 +1,7 @@
+.alert:hover {
+    cursor: pointer;
+}
+
+.alert:active {
+    transform: scale(.98);
+}

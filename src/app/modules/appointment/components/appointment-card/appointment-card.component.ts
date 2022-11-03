@@ -1,8 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Appointment } from 'src/app/models/appointment';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { AppointmentStatus } from 'src/app/models/appointment-status';
+import { first } from 'rxjs';
+import { IActionRequest} from 'src/app/models/iaction-requested';
 
 @Component({
   selector: 'app-appointment-card',
@@ -21,16 +23,22 @@ export class AppointmentCardComponent implements OnInit, OnChanges {
 
   dateManager: Date = new Date(Number(this.appointment.timestamp));
 
+  @Output('actionRequest') actionEmitter = new EventEmitter<IActionRequest>();
+
   constructor(private profileService: ProfileService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void { 
     
-    this.profileService.getProfileByUID(this.appointment.idPatient).subscribe(
-      (p: Profile[]) => this.patientProfile = p[0]
+    this.profileService.getProfileByUID(this.appointment.idPatient).pipe(first()).subscribe(
+      (p: Profile[]) => {
+        this.patientProfile = p[0];
+      }
     )
 
-    this.profileService.getProfileByUID(this.appointment.idSpecialist).subscribe(
-      (p: Profile[]) => this.specialistProfile = p[0]
+    this.profileService.getProfileByUID(this.appointment.idSpecialist).pipe(first()).subscribe(
+      (p: Profile[]) => {
+        this.specialistProfile = p[0];
+      }
     )
 
   }
@@ -67,14 +75,20 @@ export class AppointmentCardComponent implements OnInit, OnChanges {
       case 4: 
         return 'alert-success';
 
+      case 5:
+        return 'alert-danger';
+
       default: return '';
 
     }
 
   }
 
-
-
-
+  onActionSelected(action: string) {
+    this.actionEmitter.emit({
+      action: action,
+      appointment: this.appointment
+    });
+  }
 
 }

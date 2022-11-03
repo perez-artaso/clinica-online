@@ -1,7 +1,8 @@
 <div class="card-container">
     <p [ngClass]="this.setClassesByStatus(this.appointment.status)" class="alert appointment-card-header">{{this.appointment.getStatusAsString()}}</p>
     <div [ngClass]="this.setClassesByStatus(this.appointment.status)" class="alert">
-        <h4>{{ this.patientProfile.name + " " + this.patientProfile.last_name }}</h4>
+        <h4 *ngIf="this.userProfile.role == 1">{{ this.patientProfile.name + " " + this.patientProfile.last_name }}</h4>
+        <h4 *ngIf="this.userProfile.role == 0">{{ this.specialistProfile.name + " " + this.specialistProfile.last_name }}</h4>
         <h5>{{ this.appointment.speciality }}</h5>
         
         <ul>
@@ -17,13 +18,15 @@
 
             <button 
             *ngIf="(this.userProfile.role == 0 && this.appointment.specialistCommentary != '')"
+            (click)="this.onActionSelected('readSpecialistCommentary')"
             class="appointment-option" 
             title="Comentarios">
                 <i class="bi bi-chat"></i>
             </button>
 
             <button
-            *ngIf="(this.userProfile.role == 0 && this.appointment.status == 4)" 
+            *ngIf="(this.userProfile.role == 0 && this.appointment.status == 4 && this.appointment.calification == 0)" 
+            (click)="this.onActionSelected('calification')"
             class="appointment-option" 
             title="Calificar">
                 <i class="bi bi-star-half"></i>
@@ -31,13 +34,63 @@
 
             <button 
             *ngIf="(this.userProfile.role == 0 && this.appointment.status == 4 && this.appointment.specialistCommentary != '')"
-            class="appointment-option" 
+            (click)="this.onActionSelected('fillSurvey')"
+            class="appointment-option"
             title="Encuesta">
                 <i class="bi bi-ui-checks"></i>
             </button>
 
             <button 
-            *ngIf="(this.userProfile.role == 0 && ( this.appointment.status == 0 || this.appointment.status == 3 ))" 
+            *ngIf="(this.userProfile.role == 0 && ( this.appointment.status == 0 || this.appointment.status == 3 ))"
+            (click)="this.onActionSelected('cancelationByPatient')"
+            class="appointment-option" 
+            title="Cancelar">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <button 
+            *ngIf="(this.userProfile.role == 1 && ( this.appointment.status == 0 ))"
+            (click)="this.onActionSelected('acceptanceBySpecialist')"
+            class="appointment-option" 
+            title="Aceptar">
+                <i class="bi bi-check-lg"></i>
+            </button>
+
+            <button 
+            *ngIf="(this.userProfile.role == 1 && ( this.appointment.status == 0 ))"
+            (click)="this.onActionSelected('cancelationBySpecialist')"
+            class="appointment-option" 
+            title="Cancelar">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <button 
+            *ngIf="(this.userProfile.role == 1 && ( this.appointment.status == 0 ))"
+            (click)="this.onActionSelected('rejectionBySpecialist')"
+            class="appointment-option" 
+            title="Rechazar">
+                <i class="bi bi-trash"></i>
+            </button>
+
+            <button 
+            *ngIf="(this.userProfile.role == 1 && ( this.appointment.status == 3 ))"
+            (click)="this.onActionSelected('finalization')"
+            class="appointment-option" 
+            title="Finalizar">
+                <i class="bi bi-check2-all"></i>
+            </button>
+
+            <button 
+            *ngIf="(this.userProfile.role == 1 && this.appointment.patientComentary != '')"
+            (click)="this.onActionSelected('calificationView')"
+            class="appointment-option" 
+            title="Ver Reseña">
+                <i class="bi bi-star-half"></i>
+            </button>
+
+            <button 
+            *ngIf="(this.userProfile.role == 2 && ( this.appointment.status == 0 ))"
+            (click)="this.onActionSelected('cancelationByAdmin')"
             class="appointment-option" 
             title="Cancelar">
                 <i class="bi bi-x-lg"></i>

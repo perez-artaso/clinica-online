@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-6" style="margin: 0 auto;">
+        <div class="alert-success alert rounded">
+            <h3 class="alert rounded" style="background-color: var(--dark); color: white;">Confirmación de turno</h3>
+            <h3 style="font-weight: bold;">{{ this.specialistFullName }}</h3>
+            <h4>{{ this.appointment.speciality }}</h4>
+            <h5>
+                {{
+                    this.dates.getDayOfTheWeekNameByTimestamp(this.appointment.timestamp) + 
+                    " " + 
+                    this.dates.getLocaleDateStringByTimestamp(this.appointment.timestamp)
+                }}
+            </h5>
+            <h5>{{ this.dates.getLocaleTimeStringByTimestamp(this.appointment.timestamp) }}</h5>
+
+            <div class="appointment-options"> 
+                <button (click)="this.onConfirmation()" class="appointment-option" title="Confirmar">
+                    <i class="bi bi-check-lg"></i>
+                </button>
+                <button (click)="this.onCancelation()" class="appointment-option" title="Cancelar">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
+<div *ngIf="this.revealSuccessMessage" class="row">
+    <div style="background-color: rgb(130, 232, 130); margin: 0 auto; font-size: x-large;" class="alert col-md-6">
+        <i style="font-size: x-large;" class="bi bi-check-circle-fill"></i> Su turno fue correctamente solicitado.
+    </div>
+</div>
+<div *ngIf="this.revealErrorMessage" class="row">
+    <div style="background-color: rgb(230, 117, 117); margin: 0 auto; font-size: x-large;" class="alert col-md-6">
+        <i style="font-size: x-large;" class="bi bi-x-circle-fill"></i> Ha ocurrido un error inesperado. Consulte con el administrador del sitio.
+    </div>
+</div>

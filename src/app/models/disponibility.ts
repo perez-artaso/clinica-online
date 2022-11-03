@@ -2,7 +2,7 @@ import { DailyDisponibility } from "./daily-disponibility";
 
 export class Disponibility {
 
-    constructor ( private specialityName: string = '', private dailyDisponibilities: Array<DailyDisponibility> = [] ) {
+    constructor ( public specialityName: string = '', public dailyDisponibilities: Array<DailyDisponibility> = [] ) {
 
     }
 
@@ -26,5 +26,13 @@ export class Disponibility {
         return disponibilityArray;
     }
 
+    public getDailyDisponibilities(): Array<DailyDisponibility> {
+        return this.dailyDisponibilities;
+    }
+
+
+    getSpecialityName(): string {
+        return this.specialityName;
+    }
 
 }

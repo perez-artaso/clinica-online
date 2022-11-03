@@ -13,7 +13,7 @@ export class Appointment {
     calification: number;
     status: AppointmentStatus;
 
-    constructor (timestamp: string = "", duration: number = 0,  idPatient: string = "", idSpecialist: string = "", speciality: string = "", calification: number = 0, specialistCommentary: string = "", patientComentary: string = "", status = 0) {
+    constructor (timestamp: string = "", duration: number = 0,  idPatient: string = "", idSpecialist: string = "", speciality: string = "", calification: number = 0, specialistCommentary: string = "", patientComentary: string = "", status = 0, id = "") {
         this.timestamp = timestamp;
         this.duration = duration;
         this.idPatient = idPatient;
@@ -23,6 +23,7 @@ export class Appointment {
         this.patientComentary = patientComentary
         this.calification = calification;
         this.status = status;
+        this.id = id;
     }
 
     public getLiteralObjectRepresentation(): any {
@@ -46,8 +47,34 @@ export class Appointment {
             case 2: return "Rechazado";
             case 3: return "Aceptado";
             case 4: return "Realizado";
+            case 5: return "Cancelado";
             default: return "Desconocido";
         }
+    }
+
+    public static parseArrayOfLiteralObjectsToInstances(objects: Array<Appointment>): Array<Appointment> {
+        
+        let retArray: Array<Appointment> = [];
+
+        objects.forEach(
+            (object: Appointment) => retArray.push(
+                new Appointment (
+                    object.timestamp, 
+                    object.duration, 
+                    object.idPatient, 
+                    object.idSpecialist,
+                    object.speciality, 
+                    object.calification, 
+                    object.specialistCommentary, 
+                    object.patientComentary, 
+                    object.status,
+                    object.id
+                )
+            )
+        );
+
+        return retArray;
+
     }
 
 

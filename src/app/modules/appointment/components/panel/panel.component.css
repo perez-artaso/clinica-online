@@ -52,3 +52,56 @@ h4 {
 app-appointment-card {
     width: 30% !important;
 }
+
+.comment-full-screen-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(56, 171, 171, 0.4);
+}
+
+.input-container {
+    width: 50vw;
+    border-radius: 25px;
+    background-color: var(--dark)
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.smt-btn {
+    background-color: rgb(189, 83, 83);
+    width: 60%;
+    color: white;
+}
+
+@media(max-width: 780px) {
+    .input-container {
+        width: 80vw;
+    }
+}
+
+.input-title {
+    color:white;
+    margin: 1rem 0rem 1rem 1rem;
+}
+
+.calification-btn {
+    background-color: var(--light);
+    color: white;
+    margin-right: 1rem;
+}
+
+.calification-selected {
+    border: 1px solid white;
+    padding: 1rem;
+}

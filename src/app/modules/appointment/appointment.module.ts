@@ -7,6 +7,8 @@ import { AppointmentCardComponent } from './components/appointment-card/appointm
 import { CreateAppointmentComponent } from './pages/create-appointment/create-appointment.component';
 import { MmsDirective } from './directives/mms.directive';
 import { CreateAppointmentFirstStepComponent } from './components/create-appointment-first-step/create-appointment-first-step.component';
+import { AppointmentOfferComponent } from './components/appointment-offer/appointment-offer.component';
+import { AppointmentConfirmationComponent } from './components/appointment-confirmation/appointment-confirmation.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { CreateAppointmentFirstStepComponent } from './components/create-appoint
     AppointmentCardComponent,
     CreateAppointmentComponent,
     MmsDirective,
-    CreateAppointmentFirstStepComponent
+    CreateAppointmentFirstStepComponent,
+    AppointmentOfferComponent,
+    AppointmentConfirmationComponent
   ],
   imports: [
     CommonModule,

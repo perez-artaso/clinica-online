@@ -1,6 +1,6 @@
 export class DailyDisponibility {
 
-    constructor( private day: number = 0, private from: number = 0, private to: number = 0 ) {
+    constructor( public day: number = 0, public from: number = 0, public to: number = 0 ) {
 
     }
 

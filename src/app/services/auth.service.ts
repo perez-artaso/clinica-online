@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Subject } from 'rxjs';
+import { first, Subject } from 'rxjs';
+import { Profile } from '../models/profile';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +10,10 @@ import { Subject } from 'rxjs';
 export class AuthService {
 
   private currentUser: firebase.default.User | null = null;
+  private currentProfile: Profile = new Profile();
   private notifier$: Subject<firebase.default.User | null> = new Subject();
 
-  constructor(private auth: AngularFireAuth) {
+  constructor(private auth: AngularFireAuth, private profiles: ProfileService) {
     
   }
 
@@ -24,8 +27,17 @@ export class AuthService {
 
   SetCurrentUser(user: firebase.default.User): void {
     this.currentUser = user;
+
+    this.profiles.getProfileByUID(user.uid).pipe(first()).subscribe(
+      (p: Profile[]) => this.currentProfile = p[0]
+    );
+
     this.Notify();
   }
+
+  GetCurrentUserProfile(): Profile {
+    return this.currentProfile;
+  } 
 
   GetCurrentUserEmail() {
     return this.currentUser?.email;

@@ -3,5 +3,6 @@ export enum AppointmentStatus {
     Canceled = 1,
     Rejected = 2,
     Accepted = 3,
-    Done = 4
+    Done = 4,
+    CanceledByPatient = 5
 }
