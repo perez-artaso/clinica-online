@@ -5,6 +5,21 @@
 
         <div [mms]="this.mms" class="mss">
             <div class="mss-content">
+                <div class="row mt-5">
+
+                    <div 
+                    *ngFor="let patient of this.patientProfiles"
+                    (click)="this.newAppointment.idPatient = patient.uid; this.move()"
+                    class="alert alert-success col-3 me-2 patient-card">
+                        <p style="font-weight: bold;">{{ patient.name + " " + patient.last_name }}</p>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+
+        <div [mms]="this.mms" class="mss">
+            <div class="mss-content">
                 <app-create-appointment-first-step (specialityAndSpecialist)="this.receiveSpecialityAndSpecialist($event)"></app-create-appointment-first-step>
             </div>
         </div>
@@ -12,7 +27,7 @@
         <div [mms]="this.mms" class="mss">
             <div class="mss-content">
                 <app-appointment-offer 
-                *ngIf="this.mms.elementOnScreen == 1"
+                *ngIf="this.mms.elementOnScreen == 2"
                 [disponibilities]="this.specialistDailyDisponibilities" 
                 [appointments]="this.specialistAppointments"
                 (selectedDate)="this.receiveSelectedDate($event)"

@@ -19,6 +19,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MmsDirective } from './directives/mms.directive';
+import { CaptchaComponent } from './components/captcha/captcha.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MmsDirective } from './directives/mms.directive';
     BadgeComponent,
     LoadingComponent,
     HomeComponent,
-    MmsDirective
+    MmsDirective,
+    CaptchaComponent
   ],
   imports: [
     BrowserModule,

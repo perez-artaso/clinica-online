@@ -34,3 +34,11 @@
     margin-left: 10vw;
     padding: 0;
 }
+
+.patient-card:hover {
+    cursor: pointer;
+}
+
+.patient-card:active {
+    transform: scale(.95);
+}

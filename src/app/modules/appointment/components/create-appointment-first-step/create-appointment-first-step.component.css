@@ -10,3 +10,9 @@
 .alert:active {
     transform: scale(.98);
 }
+
+.first-filter-container {
+    border: solid 1px var(--dark);
+    border-radius: 5px;
+    padding: 1rem 0rem;
+}

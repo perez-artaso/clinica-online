@@ -7,14 +7,21 @@
         
         <ul>
             <li>
-                {{ this.dateManager.getDate() + "/" + this.dateManager.getMonth()  + "/" + this.dateManager.getFullYear()  }}
+                {{ this.dates.getLocaleDateStringByTimestamp(this.appointment.timestamp)  }}
             </li>
             <li>
-                {{ this.dateManager.getHours() + ":" + this.dateManager.getMinutes() }}
+                {{ this.dates.getLocaleTimeStringByTimestamp(this.appointment.timestamp) }}
             </li>
         </ul>
 
         <div class="appointment-options"> 
+
+            <button
+            style="visibility: hidden;"           
+            class="appointment-option" 
+            title="Hidden, only for keeping uniform spacing">
+                <i class="bi bi-chat"></i>
+            </button>
 
             <button 
             *ngIf="(this.userProfile.role == 0 && this.appointment.specialistCommentary != '')"

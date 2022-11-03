@@ -1,0 +1,12 @@
+<div *ngIf="this.display" id="captcha-full-screen-container">
+    <div id="captcha-container">
+        <div *ngIf="this.revealSuccessMessage" class="alert alert-success result-message"> <i class="bi bi-check-circle-fill"></i> ¡Correcto!</div>
+        <div *ngIf="this.revealErrorMessage" class="alert alert-danger result-message"> <i class="bi bi-x-circle-fill"></i> Error, intente nuevamente <br> <small>Intentos restantes: {{this.remainingAttempts}}</small></div>
+        <h1>Indique qué imágen le remite a <strong>{{this.selectedCaptchaObject.name.charAt(0).toUpperCase() + this.selectedCaptchaObject.name.slice(1)}}</strong></h1>
+    </div>
+
+    <div id="captcha-images-container">
+        <img *ngFor="let co of captchaObjects" [src]="this.getSanitizedSrc(co.img)" (click)="this.onImageSelected(co.imgCode)">
+    </div>
+
+</div>

@@ -5,6 +5,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { AppointmentStatus } from 'src/app/models/appointment-status';
 import { first } from 'rxjs';
 import { IActionRequest} from 'src/app/models/iaction-requested';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: 'app-appointment-card',
@@ -25,7 +26,7 @@ export class AppointmentCardComponent implements OnInit, OnChanges {
 
   @Output('actionRequest') actionEmitter = new EventEmitter<IActionRequest>();
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService, public dates: DateService) { }
 
   ngOnInit(): void { 
     
