@@ -87,6 +87,8 @@ export class CaptchaComponent implements OnInit {
     this.remainingAttempts--;
 
     if (this.remainingAttempts == 0) {
+      this.remainingAttempts = 3;
+      this.revealErrorMessage = false;
       this.failureEmitter.emit();
       this.captcha.NotifyFailure();
     }

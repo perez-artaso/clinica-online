@@ -1,0 +1,101 @@
+#mms-container {
+    display: flex;
+    overflow: hidden;
+    width: 65vw;
+    margin: 0 auto;
+}
+
+.mms {
+    min-width: 100%;
+    transition: all 1s ease-in-out;
+}
+
+#form-container {
+    padding: 1rem;
+    background-color: var(--light);
+    border-radius: 10px;
+    width: 65vw;
+    margin: 2rem auto 0rem auto;
+    border: 3rem var(--dark) solid;
+}
+
+@media (max-width: 780px) {
+
+    #mms-container {
+        width: 80vw;
+    }
+
+    #form-container {
+        width: 80vw;
+    }
+}
+
+#image-container {
+    background-color: var(--light);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0rem;
+}
+
+#profile-image {
+    border-radius: 100%;
+    max-width: 200px;
+}
+
+#change-image-btn {
+    background-color: var(--dark);
+    color: white;
+    margin-left: 1rem;
+    font-size: x-large;
+    border: solid 1px var(--dark);
+}
+
+#image-and-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+label {
+    font-weight: bold;
+    font-size: x-large;
+    margin: 1rem 0rem;
+}
+
+input {
+    font-size: x-large;
+}
+
+i {
+    margin-left: 1rem;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+i:active {
+    font-size: large;
+}
+
+.edition-btn {
+    display: none;
+}
+
+#specialities-btn {
+    background-color: var(--dark);
+    color: white;
+    font-size: x-large;
+    border: none;
+}
+
+#specialities-btn:active {
+    transform: scale(.95);
+}

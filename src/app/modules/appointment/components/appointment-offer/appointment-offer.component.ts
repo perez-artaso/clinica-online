@@ -18,7 +18,7 @@ export class AppointmentOfferComponent implements AfterViewInit {
 
   appointmentOffers: Array<AppointmentOffer> = [];
 
-  display: boolean = false;
+  display: boolean = true;
 
   constructor(public dates: DateService) { }
 
@@ -41,8 +41,6 @@ export class AppointmentOfferComponent implements AfterViewInit {
       }
 
     );
-
-    this.display = true;
 
   }
 

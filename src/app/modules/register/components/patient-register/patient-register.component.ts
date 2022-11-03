@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
 import { Profile } from 'src/app/models/profile';
 import { ProfileImages } from 'src/app/models/profile-images';
+import { CaptchaService } from 'src/app/services/captcha.service';
 import { ProfileImagesService } from 'src/app/services/profile-images.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { RegisterService } from '../../services/register.service';
@@ -36,9 +38,21 @@ export class PatientRegisterComponent implements OnInit {
     }
   );
 
-  constructor(private register: RegisterService, private profiles: ProfileService, private profileImages: ProfileImagesService) { }
+  constructor(private router: Router, private register: RegisterService, private profiles: ProfileService, private profileImages: ProfileImagesService, private captcha: CaptchaService) { }
 
   ngOnInit(): void {
+    this.captcha.CaptchaNotifications().subscribe(
+      (result: string) => {
+        if (result == 'success'){
+          this.RegisterUser();
+          this.captcha.HideCaptcha();
+        } else if (result == 'failure') {
+          this.captcha.HideCaptcha();
+          this.exit()
+          this.router.navigate(['/']);
+        }
+      }
+    );
   }
 
   submit() {
@@ -47,41 +61,8 @@ export class PatientRegisterComponent implements OnInit {
 
       if (this.newUserForm.valid) {
 
-        this.register.NewUser(
-          this.newUserForm.get("email")?.value, this.newUserForm.get("password")?.value 
-        ).then(
-        async () => {
-
-            let user_id = await this.register.GetNewUserID();
-
-            this.profiles.addDocument(
-              new Profile(
-                user_id, 
-                this.newUserForm.get("name")?.value,
-                this.newUserForm.get("last_name")?.value,
-                this.newUserForm.get("age")?.value,
-                this.newUserForm.get("id_number")?.value,
-                this.newUserForm.get("email")?.value,
-                0
-              ).getLiteralObjectRepresentation()
-            );
-
-            this.profileImages.addDocument(
-              new ProfileImages(
-                user_id,
-                [
-                  this.base64FirstImage,
-                  this.base64SecondImage
-                ]
-              ).getLiteralObjectRepresentation()
-            );
-
-            this.register.VerifyUser();
-
-            this.exit();
-
-          }
-        )
+        this.captcha.RevealCaptcha();
+        
       } else {
         this.newUserForm.markAllAsTouched();
       }
@@ -96,6 +77,44 @@ export class PatientRegisterComponent implements OnInit {
       this.base64FirstImage = base64;
       this.newUserForm.get('first_profile_image')?.setValue("ok");
     });
+  }
+
+  RegisterUser() {
+    this.register.NewUser(
+      this.newUserForm.get("email")?.value, this.newUserForm.get("password")?.value 
+    ).then(
+    async () => {
+
+        let user_id = await this.register.GetNewUserID();
+
+        this.profiles.addDocument(
+          new Profile(
+            user_id, 
+            this.newUserForm.get("name")?.value,
+            this.newUserForm.get("last_name")?.value,
+            this.newUserForm.get("age")?.value,
+            this.newUserForm.get("id_number")?.value,
+            this.newUserForm.get("email")?.value,
+            0
+          ).getLiteralObjectRepresentation()
+        );
+
+        this.profileImages.addDocument(
+          new ProfileImages(
+            user_id,
+            [
+              this.base64FirstImage,
+              this.base64SecondImage
+            ]
+          ).getLiteralObjectRepresentation()
+        );
+
+        this.register.VerifyUser();
+
+        this.exit();
+
+      }
+    )
   }
 
   secondImageSubmitted(event: any) {

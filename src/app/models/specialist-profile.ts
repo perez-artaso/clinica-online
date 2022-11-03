@@ -42,5 +42,6 @@ export class SpecialistProfile extends Profile {
         return specialitiesArray;
 
     }
+    
 
 }

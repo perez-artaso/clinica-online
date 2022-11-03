@@ -35,7 +35,7 @@ export class AuthService {
     this.Notify();
   }
 
-  GetCurrentUserProfile(): Profile {
+  GetCurrentUserProfile() {
     return this.currentProfile;
   } 
 

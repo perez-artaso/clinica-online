@@ -11,13 +11,16 @@
           <li class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/home">Inicio</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/profile/my-profile">Mi Perfil</a>
+          </li>
           <li *ngIf="this.profile.role == 0 || this.profile.role == 1" class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/appointments/panel">Mis Turnos</a>
           </li>
           <li *ngIf="this.profile.role == 2" class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/appointments/panel">Turnos</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="this.profile.role == 0 || this.profile.role == 2" class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/appointments/new">Sacar Turno</a>
           </li>
           <li *ngIf="this.profile.role == 2" class="nav-item">

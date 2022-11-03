@@ -32,6 +32,10 @@ export class Profile {
         }
     }
 
+    setId(id: string) {
+        this.id = id;
+    }
+
 
 
 }

@@ -1,0 +1,148 @@
+<div id="form-container" [formGroup]="this.patientProfileForm">
+    <div id="image-container">
+        <div id="image-and-button">
+            <img id="profile-image" [src]="this.profileImageUrl">
+            <button id="change-image-btn" class="btn" (click)="profileImgInput.click()">
+                <i style="margin-right: 1rem;" class="bi bi-pencil"></i>Cambiar Imagen
+            </button>
+            <input type="file" #profileImgInput style="visibility: hidden; height: 0px; width: 0px; margin: 0; padding: 0;" (change)="this.uploadNewProfileImage($event)">
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="name">
+                    Nombre
+                    <i 
+                    #editName 
+                    (click)="this.editFieldRequest(editName, confirmName, cancelName, 'name')"
+                    class="bi bi-pencil-fill"
+                    ></i> 
+                    <i 
+                        #confirmName 
+                        class="bi bi-check-square-fill edition-btn"
+                        (click)="this.update(editName, confirmName, cancelName, 'name')"
+                    ></i>
+                    <i 
+                        #cancelName 
+                        class="bi bi-x-square-fill edition-btn"
+                        (click)="this.cancel(editName, confirmName, cancelName, 'name')"
+                    ></i>
+                </label>
+                <input type="text" name="name" id="name" formControlName="name" class="form-control">
+                
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="last_name">
+                    Apellido
+                    <i 
+                    #editLastname 
+                    (click)="this.editFieldRequest(editLastname, confirmLastname, cancelLastName, 'last_name')"
+                    class="bi bi-pencil-fill"
+                    ></i> 
+                    <i 
+                        #confirmLastname 
+                        class="bi bi-check-square-fill edition-btn"
+                        (click)="this.update(editLastname, confirmLastname, cancelLastName, 'last_name')"
+                    ></i>
+                    <i 
+                        #cancelLastName 
+                        class="bi bi-x-square-fill edition-btn"
+                        (click)="this.cancel(editLastname, confirmLastname, cancelLastName, 'last_name')"
+                    ></i>
+                </label>
+                <input type="text" name="last_name" id="last_name" formControlName="last_name" class="form-control">
+                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="age">
+                    Edad
+                    <i 
+                    #editAge 
+                    (click)="this.editFieldRequest(editAge, confirmAge, cancelAge, 'age')"
+                    class="bi bi-pencil-fill"
+                    ></i> 
+                    <i 
+                        #confirmAge 
+                        class="bi bi-check-square-fill edition-btn"
+                        (click)="this.update(editAge, confirmAge, cancelAge, 'age')"
+                    ></i>
+                    <i 
+                        #cancelAge 
+                        class="bi bi-x-square-fill edition-btn"
+                        (click)="this.cancel(editAge, confirmAge, cancelAge, 'age')"
+                    ></i>
+                </label>
+                <input type="text" name="age" id="age" formControlName="age" class="form-control">
+                
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="id_number">
+                    DNI
+                    <i 
+                    #editIdNumber 
+                    (click)="this.editFieldRequest(editIdNumber, confirmIdNumber, cancelIdNumber, 'id_number')"
+                    class="bi bi-pencil-fill"
+                    ></i> 
+                    <i 
+                        #confirmIdNumber 
+                        class="bi bi-check-square-fill edition-btn"
+                        (click)="this.update(editIdNumber, confirmIdNumber, cancelIdNumber, 'id_number')"
+                    ></i>
+                    <i 
+                        #cancelIdNumber 
+                        class="bi bi-x-square-fill edition-btn"
+                        (click)="this.cancel(editIdNumber, confirmIdNumber, cancelIdNumber, 'id_number')"
+                    ></i>
+                </label>
+                <input type="text" name="id_number" id="id_number" formControlName="id_number" class="form-control">
+                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="user_email">
+                    De
+                    <i 
+                    #editEmail 
+                    (click)="this.editFieldRequest(editEmail, confirmEmail, cancelEmail, 'user_email')"
+                    class="bi bi-pencil-fill"
+                    ></i> 
+                    <i 
+                        #confirmEmail 
+                        class="bi bi-check-square-fill edition-btn"
+                        (click)="this.update(editEmail, confirmEmail, cancelEmail, 'user_email')"
+                    ></i>
+                    <i 
+                        #cancelEmail 
+                        class="bi bi-x-square-fill edition-btn"
+                        (click)="this.cancel(editEmail, confirmEmail, cancelEmail, 'user_email')"
+                    ></i>
+                </label>
+                <input type="text" name="user_email" id="user_email" formControlName="user_email" class="form-control">
+                
+            </div>
+        </div>
+
+    </div>
+
+</div>

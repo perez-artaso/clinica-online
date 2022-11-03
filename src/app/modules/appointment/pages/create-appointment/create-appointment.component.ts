@@ -65,7 +65,7 @@ export class CreateAppointmentComponent implements OnInit {
 
     this.specialistFullName = specialityAndSpecialist.specialist.name + " " + specialityAndSpecialist.specialist.last_name;
 
-    this.appointments.getAppointmentsBySpecialistId(this.newAppointment.idSpecialist).pipe(first()).subscribe(
+    this.appointments.getAppointmentsBySpecialistId(this.newAppointment.idSpecialist).subscribe(
       (a: Appointment[]) => this.specialistAppointments = a
     );
     

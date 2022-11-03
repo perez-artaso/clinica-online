@@ -1,0 +1,70 @@
+#form-container {
+    padding: 1rem;
+    background-color: var(--light);
+    border-radius: 10px;
+    width: 65vw;
+    margin: 2rem auto 0rem auto;
+    border: 3rem var(--dark) solid;
+}
+
+@media (max-width: 780px) {
+
+    #form-container {
+        min-width: 80vw;
+    }
+
+    * {
+        box-sizing: content-box !important;
+    }
+}
+
+.speciality-container {
+    max-width: 40%;
+    margin-top: 2rem;
+}
+
+.speciality-name {
+    background-color: var(--dark);
+    color:white;
+    font-size: x-large;
+}
+
+label {
+    font-weight: bold;
+    font-size: x-large;
+    margin: 1rem 0rem;
+}
+
+
+input {
+    font-size: x-large;
+}
+
+i {
+    margin-left: 1rem;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+i:active {
+    font-size: large;
+}
+
+.edition-btn {
+    display: none;
+}
+
+.days {
+    flex-wrap: wrap;
+}
+
+.day-of-week {
+    border: 1px solid var(--dark);
+    text-align: center !important;
+}
+
+.day-of-week:hover {
+    cursor: pointer;
+}

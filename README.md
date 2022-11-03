@@ -43,5 +43,3 @@ En esta sección usted podrá solicitar un nuevo turno. Los pasos a seguir son s
 Para cancelar un turno, usted debe dirigirse a la sección "Mis Turnos" y marcar la opción "Cancelar" (señalizada con una "X") en la tarjeta del turno correspondiente.
 
 ![cTurno](https://firebasestorage.googleapis.com/v0/b/clinica-online-f088a.appspot.com/o/cancelar-turno.gif?alt=media&token=33783cc6-ef0e-4f0a-a650-5f3f4e078e43)
-
-ETC.

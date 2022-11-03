@@ -16,9 +16,9 @@
         (click)="this.onSelectedSpecialist(specialist)"
         class="alert alert-success col-3 me-2">
             <p style="font-weight: bold;">{{ specialist.name + " " + specialist.last_name }}</p>
-            <p *ngFor="let speciality of specialist.specialities">
+            <div *ngFor="let speciality of specialist.specialities">
                 {{speciality}} 
-            </p>
+            </div>
         </div>
 
     </div>

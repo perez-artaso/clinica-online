@@ -1,0 +1,2 @@
+<app-specialist-profile *ngIf="this.currentProfile.role == 1 && this.currentProfile.name != ''" [profile]="this.currentProfile" [profileImages]="this.profileImages"></app-specialist-profile>
+<app-patient-profile *ngIf="this.currentProfile.role == 0 && this.currentProfile.name != ''" [profile]="this.currentProfile" [profileImages]="this.profileImages"></app-patient-profile>
