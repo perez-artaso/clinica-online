@@ -16,3 +16,12 @@
     border-radius: 5px;
     padding: 1rem 0rem;
 }
+
+.specialist {
+    border-radius: 100%;
+}
+
+img {
+    border-radius: 100%;
+    max-width: 200px;
+}

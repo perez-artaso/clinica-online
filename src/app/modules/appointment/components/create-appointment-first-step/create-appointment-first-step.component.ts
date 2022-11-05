@@ -1,10 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { first } from 'rxjs';
+import { ProfileImages } from 'src/app/models/profile-images';
 import { SpecialistProfile } from 'src/app/models/specialist-profile';
 import { Speciality } from 'src/app/modules/register/models/speciality';
 import { SpecialityService } from 'src/app/modules/register/services/speciality.service';
+import { ProfileImagesService } from 'src/app/services/profile-images.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { environment } from 'src/environments/environment';
 import { ISpecialityAndSpecialist } from '../../models/speciality-and-specialist';
 
 @Component({
@@ -14,7 +17,7 @@ import { ISpecialityAndSpecialist } from '../../models/speciality-and-specialist
 })
 export class CreateAppointmentFirstStepComponent implements OnInit {
 
-  showSpecialists: boolean = false;
+  showSpecialists: boolean = true;
   showSpecialities: boolean = false;
 
   specialists: Array<SpecialistProfile> = [];
@@ -32,8 +35,9 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
   @Output('specialityAndSpecialist') specialistEmitter = new EventEmitter<ISpecialityAndSpecialist>();
 
   systemSpecialities: Speciality[] = [];
+  specialistsImages: ProfileImages[] = [];
 
-  constructor(private profiles: ProfileService, private specialityService: SpecialityService) { }
+  constructor(private profiles: ProfileService, private specialityService: SpecialityService, private profileImages: ProfileImagesService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
 
@@ -42,6 +46,7 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
       (p: Array<SpecialistProfile>) => {
         this.specialists = p;
         this.specialities = this.getSpecialityList();
+        this.getSpecialistsImages();
       }
 
     );
@@ -50,6 +55,38 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
       (s) => this.systemSpecialities = s
     )
 
+  }
+
+  getSpecialistsImages() {
+    this.specialists.forEach(
+      (specialist: SpecialistProfile) => {
+
+        this.profileImages.getImagesByUID(specialist.uid).pipe(first()).subscribe(
+          (imgs: ProfileImages[]) => {
+            if (imgs.length > 0) {
+              this.specialistsImages.push(imgs[0]);
+            }            
+          }
+        )
+
+      }
+    );
+  }
+
+  getSpecialistProfileImage(uid: string): SafeResourceUrl {
+
+    for (let i = 0; i < this.specialistsImages.length; i++) {
+      if (this.specialistsImages[i].uid == uid) {
+        return this.getSanitizedSrc(this.specialistsImages[i].images[0]);
+      }
+    }
+
+    return this.getSanitizedSrc(environment.templateImg);
+
+  }
+
+  getSanitizedSrc(src: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl( 'data:image/jpg;base64,' + src );
   }
 
   getSpecialityList(): Array<string> {
@@ -188,6 +225,25 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
     this.showSpecialities = false;
     this.showSpecialistsBySpeciality = false;
     this.showSpecialitiesBySpecialist = false;
+  }
+
+  getSpecialityImageURL(specialityName: string): string {
+
+    let url = 'assets/speciality-images/';
+    let found = false;
+
+    for (let i = 0; i < this.systemSpecialities.length; i++) {
+
+      if (this.systemSpecialities[i].name == specialityName) {
+        url += this.systemSpecialities[i].image + '.png';
+        found = true;
+        break;
+      }
+
+    }
+
+    return (found ? url : url + 'default.png')
+
   }
 
 }
