@@ -1,5 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { TitleStrategy } from '@angular/router';
+import { first } from 'rxjs';
 import { SpecialistProfile } from 'src/app/models/specialist-profile';
+import { Speciality } from 'src/app/modules/register/models/speciality';
+import { SpecialityService } from 'src/app/modules/register/services/speciality.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { ISpecialityAndSpecialist } from '../../models/speciality-and-specialist';
 
@@ -27,9 +31,12 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
   
   @Output('specialityAndSpecialist') specialistEmitter = new EventEmitter<ISpecialityAndSpecialist>();
 
-  constructor(private profiles: ProfileService) { }
+  systemSpecialities: Speciality[] = [];
+
+  constructor(private profiles: ProfileService, private specialityService: SpecialityService) { }
 
   ngOnInit(): void {
+
     this.profiles.getSpecialistsProfiles().subscribe(
 
       (p: Array<SpecialistProfile>) => {
@@ -38,6 +45,11 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
       }
 
     );
+
+    this.specialityService.getDocuments().pipe(first()).subscribe(
+      (s) => this.systemSpecialities = s
+    )
+
   }
 
   getSpecialityList(): Array<string> {

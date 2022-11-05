@@ -85,13 +85,16 @@ export class AppointmentOfferComponent implements AfterViewInit {
 
   }
 
-  appointmentOffersTimestampBreakdown (date: Date, fromHours: number, toHours: number, appointmentsDuration: number) {
+  appointmentOffersTimestampBreakdown (date: Date, fromHours: string, toHours: string, appointmentsDuration: number) {
 
     let opening = new Date(date);
     let closure = new Date(date);
 
-    opening.setHours(fromHours, 0, 0, 0);
-    closure.setHours(toHours, 0, 0, 0);
+    let splittedFromHour = fromHours.split(":");
+    let splittedToHour = toHours.split(":");
+
+    opening.setHours(Number(splittedFromHour[0]), Number(splittedFromHour[1]), 0, 0);
+    closure.setHours(Number(splittedToHour[0]), Number(splittedToHour[1]), 0, 0);
 
     for ( let i = opening.getTime(); i < closure.getTime(); i = i + (1000 * 60 * appointmentsDuration) ) {
       this.appointmentOffers.push(new AppointmentOffer(i.toString()));

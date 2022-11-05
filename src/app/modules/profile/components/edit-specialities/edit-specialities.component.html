@@ -1,39 +1,204 @@
 <div id="form-container">
     <h1>Mis Especialidades</h1>
-
-    <div class="speciality-container">
-        <div class="alert speciality-name">
-            Endodoncia
+    <div class="row">
+        <div *ngFor="let disp of this.disponibility" class="speciality-container col-6">
+            <div class="alert speciality-name">
+                {{disp.specialityName}}
+            </div>
+    
+            <div class="row d-flex justify-content-evenly days">
+                <div class="col-4 col-lg-2">
+                    <div (click)="this.addOrRemoveWorkingDay(disp, 1)" [ngClass]="{'works-on': disp.worksOn(1)}" class="alert day-of-week">
+                        L
+                    </div>
+                    <div class="hidden-time-range" [ngClass]="{'reveal-time-range': disp.worksOn(1)}">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getFromByDay(1))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getFromByDay(1)"
+                            (change)="this.assignNewValue(disp, 'from', 1, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 1, 'from').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 1, 'from').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 1, 'from').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getToByDay(1))}" 
+                            type="text" class="form-control" 
+                            [value]="disp.getToByDay(1)"
+                            (change)="this.assignNewValue(disp, 'to', 1, $event)">         
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 1, 'to').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>                   
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 1, 'to').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 1, 'to').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <div (click)="this.addOrRemoveWorkingDay(disp, 2)" [ngClass]="{'works-on': disp.worksOn(2)}" class="alert day-of-week">
+                        M
+                    </div>
+                    <div class="hidden-time-range" [ngClass]="{'reveal-time-range': disp.worksOn(2)}">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getFromByDay(2))}" 
+                            type="text" class="form-control" 
+                            [value]="disp.getFromByDay(2)"
+                            (change)="this.assignNewValue(disp, 'from', 2, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 2, 'from').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 2, 'from').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 2, 'from').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getToByDay(2))}" 
+                            type="text" class="form-control" 
+                            [value]="disp.getToByDay(2)"
+                            (change)="this.assignNewValue(disp, 'to', 2, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 2, 'to').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 2, 'to').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 2, 'to').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <div (click)="this.addOrRemoveWorkingDay(disp, 3)" [ngClass]="{'works-on': disp.worksOn(3)}" class="alert day-of-week">
+                        X
+                    </div>
+                    <div class="hidden-time-range" [ngClass]="{'reveal-time-range': disp.worksOn(3)}">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getFromByDay(3))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getFromByDay(3)"
+                            (change)="this.assignNewValue(disp, 'from', 3, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 3, 'from').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 3, 'from').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 3, 'from').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getToByDay(3))}" 
+                            type="text" class="form-control" 
+                            [value]="disp.getToByDay(3)"
+                            (change)="this.assignNewValue(disp, 'to', 3, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 3, 'to').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 3, 'to').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 3, 'to').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <div (click)="this.addOrRemoveWorkingDay(disp, 4)" [ngClass]="{'works-on': disp.worksOn(4)}" class="alert day-of-week">
+                        J
+                    </div>
+                    <div class="hidden-time-range" [ngClass]="{'reveal-time-range': disp.worksOn(4)}">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getFromByDay(4))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getFromByDay(4)"
+                            (change)="this.assignNewValue(disp, 'from', 4, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 4, 'from').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 4, 'from').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 4, 'from').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getToByDay(4))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getToByDay(4)"
+                            (change)="this.assignNewValue(disp, 'to', 4, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 4, 'to').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 4, 'to').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 4, 'to').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <div (click)="this.addOrRemoveWorkingDay(disp, 5)" [ngClass]="{'works-on': disp.worksOn(5)}" class="alert day-of-week">
+                        V
+                    </div>
+                    <div class="hidden-time-range" [ngClass]="{'reveal-time-range': disp.worksOn(5)}">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getFromByDay(5))}" 
+                            type="text" class="form-control" 
+                            [value]="disp.getFromByDay(5)"
+                            (change)="this.assignNewValue(disp, 'from', 5, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 5, 'from').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 5, 'from').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 5, 'from').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getToByDay(5))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getToByDay(5)"
+                            (change)="this.assignNewValue(disp, 'from', 5, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 5, 'to').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 5, 'to').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 5, 'to').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <div (click)="this.addOrRemoveWorkingDay(disp, 6)" [ngClass]="{'works-on': disp.worksOn(6)}" class="alert day-of-week">
+                        S
+                    </div>
+                    <div class="hidden-time-range" [ngClass]="{'reveal-time-range': disp.worksOn(6)}">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getFromByDay(6))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getFromByDay(6)"
+                            (change)="this.assignNewValue(disp, 'from', 6, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 6, 'from').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 6, 'from').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 6, 'from').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Hasta</label>
+                            <input 
+                            [ngClass]="{'invalid-hour': !this.isValidHour(disp.getToByDay(6))}" 
+                            type="text" 
+                            class="form-control" 
+                            [value]="disp.getToByDay(6)"
+                            (change)="this.assignNewValue(disp, 'to', 6, $event)">
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 6, 'to').wrongFormat" class="invalid-hour-message">El formato esperado es NN:NN (ej, 09:30)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 6, 'to').hoursOutOfRange" class="invalid-hour-message">La hora señalada está fuera de rango (00 - 23)</small>
+                            <small *ngIf="this.getInputtedHourEvaluationByDay(disp, 6, 'to').minutesOutOfRange" class="invalid-hour-message">Los minutos indicados están fuera de rango (00 - 59)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
         </div>
+    </div>
+    
+    <div>
+        <button class="confirm-disponibilities" (click)="this.confirmDisponibility()">Confirmar Horarios</button>
+    </div>
 
-        <div class="row d-flex justify-content-evenly days">
-            <div class="col-4 col-lg-2">
-                <div class="alert day-of-week">
-                    L
-                </div>
-            </div>
-            <div class="col-4 col-lg-2">
-                <div class="alert day-of-week">
-                    M
-                </div>
-            </div>
-            <div class="col-4 col-lg-2">
-                <div class="alert day-of-week">
-                    M
-                </div>
-            </div>
-            <div class="col-4 col-lg-2">
-                <div class="alert day-of-week">
-                    J
-                </div>
-            </div>
-            <div class="col-4 col-lg-2">
-                <div class="alert day-of-week">
-                    V
-                </div>
-            </div>
-        </div>
-
+    <div *ngIf="this.success" style="text-align: center">
+        <div class="alert alert-success" style="font-size: x-large;">Horarios Actualizados</div>
     </div>
 
 </div>

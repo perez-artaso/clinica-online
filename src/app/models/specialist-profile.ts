@@ -25,7 +25,7 @@ export class SpecialistProfile extends Profile {
             "user_email": this.user_email,
             "role": this.role,
             "approved": this.approved,
-            "speciality": this.getSpecialitiesLiteralObjectRepresentation()
+            "specialities": this.getSpecialitiesLiteralObjectRepresentation()
         }
     }
 

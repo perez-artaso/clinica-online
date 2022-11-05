@@ -1,10 +1,8 @@
 #form-container {
     padding: 1rem;
-    background-color: var(--light);
     border-radius: 10px;
     width: 65vw;
     margin: 2rem auto 0rem auto;
-    border: 3rem var(--dark) solid;
 }
 
 @media (max-width: 780px) {
@@ -37,7 +35,7 @@ label {
 
 
 input {
-    font-size: x-large;
+    font-size: large;
 }
 
 i {
@@ -67,4 +65,42 @@ i:active {
 
 .day-of-week:hover {
     cursor: pointer;
+}
+
+.works-on {
+    background-color: var(--light);
+    color: white;
+}
+
+.hidden-time-range {
+    display: none;
+}
+
+.reveal-time-range {
+    display: block !important;
+}
+
+.confirm-disponibilities {
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: x-large;
+    background-color: var(--light);
+    color:white;
+    margin-top: 5rem;
+}
+
+.confirm-disponibilities:active {
+    transform: scale(.95);
+}
+
+.confirm-disponibilities:hover {
+    cursor: pointer;
+}
+
+.invalid-hour {
+    border: solid rgb(242, 99, 99) 1px;
+}
+
+.invalid-hour-message {
+    color: rgb(242, 99, 99);
 }
