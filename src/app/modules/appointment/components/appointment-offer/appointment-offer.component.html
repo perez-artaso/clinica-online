@@ -1,12 +1,22 @@
-<div *ngIf="this.display" class="row mt-5">
+<div *ngIf="!this.displayTimes" class="row mt-5">
 
     <div 
-    *ngFor="let offer of this.appointmentOffers"
+    *ngFor="let possibleDay of this.possibleDays"
     class="alert alert-success col-3 me-2"
-    (click)="this.emmitSelectedDate(offer.timestamp)">
-        <h4 style="font-weight: bold;">{{ this.dates.getDayOfTheWeekNameByTimestamp(offer.timestamp) }}</h4>
-        <div>{{ this.dates.getLocaleDateStringByTimestamp(offer.timestamp) }}</div>
-        <div>{{ this.dates.getLocaleTimeStringByTimestamp(offer.timestamp) }}</div>
+    (click)="this.onSelectedDay(possibleDay)">
+        <h4 style="font-weight: bold;">{{ this.dates.getInvertedLocaleDateStringByTimestamp(possibleDay.getTime().toString()) }}</h4>
+        <div>{{ this.dates.getDayOfTheWeekNameByTimestamp(possibleDay.getTime().toString()) }}</div>
+    </div>
+
+</div>
+
+<div *ngIf="this.displayTimes" class="row mt-5">
+
+    <div 
+    *ngFor="let possibleTime of this.possibleTimes"
+    class="alert alert-success col-3 me-2"
+    (click)="this.emmitSelectedDate(possibleTime.timestamp)">
+        <h4 style="font-weight: bold;">{{ this.dates.getLocaleTimeStringByTimestamp(possibleTime.timestamp) }}</h4>
     </div>
 
 </div>

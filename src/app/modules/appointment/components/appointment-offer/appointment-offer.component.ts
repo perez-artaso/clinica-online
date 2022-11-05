@@ -17,14 +17,53 @@ export class AppointmentOfferComponent implements AfterViewInit {
   @Output('selectedDate') selectedDateEmitter = new EventEmitter<Date>();
 
   appointmentOffers: Array<AppointmentOffer> = [];
+  
+  possibleDays: Array<Date> = [];
+  possibleTimes: Array<AppointmentOffer> = [];
 
-  display: boolean = true;
+  displayTimes: boolean = false;
 
   constructor(public dates: DateService) { }
 
   ngAfterViewInit(): void {
-    this.GenerateAppointmentOffers();
-    this.FilterAndDisplayOffers(); 
+    /*this.GenerateAppointmentOffers();
+    this.FilterAndDisplayOffers();*/
+    this.setPossibleDays();
+  }
+
+  setPossibleDays() {
+    for (let i = 0; i < this.disponibilities.length; i++) {
+
+      this.possibleDays.push(
+        this.getNextWeeksDesiredDaysDate(1, this.disponibilities[i].day)
+      )
+
+      this.possibleDays.push(
+        this.getNextWeeksDesiredDaysDate(2, this.disponibilities[i].day)
+      )
+
+    }
+
+  }
+
+  onSelectedDay(date: Date) {
+    
+    let _dailyDisponibility: DailyDisponibility = new DailyDisponibility();
+
+    this.disponibilities.forEach(
+      (disponibility) => {
+
+        if (disponibility.day == date.getDay()) {
+          _dailyDisponibility = disponibility;
+        }
+
+      }
+    );
+
+    if (_dailyDisponibility.day != 0) {
+      this.appointmentOffersTimestampBreakdown(date, _dailyDisponibility.from, _dailyDisponibility.to, 30, this.possibleTimes);
+    }
+
   }
 
   FilterAndDisplayOffers() {
@@ -52,14 +91,16 @@ export class AppointmentOfferComponent implements AfterViewInit {
         this.getNextWeeksDesiredDaysDate(1, this.disponibilities[i].day),
         this.disponibilities[i].from,
         this.disponibilities[i].to,
-        30
+        30,
+        this.appointmentOffers
       );
 
       this.appointmentOffersTimestampBreakdown(
         this.getNextWeeksDesiredDaysDate(2, this.disponibilities[i].day),
         this.disponibilities[i].from,
         this.disponibilities[i].to,
-        30
+        30,
+        this.appointmentOffers
       );
 
     }
@@ -85,7 +126,7 @@ export class AppointmentOfferComponent implements AfterViewInit {
 
   }
 
-  appointmentOffersTimestampBreakdown (date: Date, fromHours: string, toHours: string, appointmentsDuration: number) {
+  appointmentOffersTimestampBreakdown (date: Date, fromHours: string, toHours: string, appointmentsDuration: number, timestampBreakdownStorage: Array<AppointmentOffer>) {
 
     let opening = new Date(date);
     let closure = new Date(date);
@@ -97,7 +138,7 @@ export class AppointmentOfferComponent implements AfterViewInit {
     closure.setHours(Number(splittedToHour[0]), Number(splittedToHour[1]), 0, 0);
 
     for ( let i = opening.getTime(); i < closure.getTime(); i = i + (1000 * 60 * appointmentsDuration) ) {
-      this.appointmentOffers.push(new AppointmentOffer(i.toString()));
+      timestampBreakdownStorage.push(new AppointmentOffer(i.toString()));
     }
 
   }

@@ -7,6 +7,20 @@ export class DateService {
 
   constructor() { }
 
+  getInvertedLocaleDateStringByTimestamp(timestamp: string) {
+
+    let localeDateString = new Date(Number(timestamp)).toLocaleDateString();
+    let splittedDateString = localeDateString.split('/');
+
+    if (splittedDateString[1].length == 1) splittedDateString[1] = '0' + splittedDateString[1] ;
+    if (splittedDateString[0].length == 1) splittedDateString[0] = '0' + splittedDateString[0] ;
+    
+    if (splittedDateString.length == 3) {
+      return splittedDateString[2] + '-' + splittedDateString[1] + '-' + splittedDateString[0];
+    } else return localeDateString;
+
+  }
+
   getLocaleDateStringByTimestamp(timestamp: string): string {
     return new Date(Number(timestamp)).toLocaleDateString();
   }

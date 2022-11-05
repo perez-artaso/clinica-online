@@ -5,7 +5,7 @@
         <div 
         *ngFor="let specialist of this.specialists"
         (click)="this.onSelectedSpecialist(specialist)"
-        class="alert alert-success col-3 me-2 specialist">
+        class="alert alert-success col-3 me-4 specialist">
             <p style="font-weight: bold; font-size: large;">{{ specialist.name + " " + specialist.last_name }}</p>
             <img [src]="this.getSpecialistProfileImage(specialist.uid)" alt="specialist-image">
         </div>
@@ -17,7 +17,7 @@
         <div 
         *ngFor="let speciality of this.specialitiesBySpecialist"
         (click)="selectSpecialityAndSubmit(speciality)"
-        class="alert alert-success col-3 me-2">
+        class="alert alert-success col-3 me-2 speciality-container">
             <p style="font-weight: bold;">{{ speciality }}</p>
             <img [src]="this.getSpecialityImageURL(speciality)" alt="speciality-image">
         </div>
