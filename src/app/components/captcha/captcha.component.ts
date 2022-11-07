@@ -76,6 +76,7 @@ export class CaptchaComponent implements OnInit {
     setTimeout( ()=> {
       this.successEmitter.emit(); 
       this.captcha.NotifySuccess();
+      this.reset();
     }, 1500 );
 
   }
@@ -87,12 +88,18 @@ export class CaptchaComponent implements OnInit {
     this.remainingAttempts--;
 
     if (this.remainingAttempts == 0) {
-      this.remainingAttempts = 3;
-      this.revealErrorMessage = false;
       this.failureEmitter.emit();
       this.captcha.NotifyFailure();
+      this.reset();
     }
 
+  }
+
+  reset () {
+    this.revealErrorMessage = false;
+    this.revealSuccessMessage = false;
+    this.remainingAttempts = 3;
+    this.selectRandomCaptchaObject();
   }
 
 }

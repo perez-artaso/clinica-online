@@ -1,0 +1,37 @@
+h1 {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    margin: 2rem 0rem;
+}
+
+#new-field-btn {
+    border-radius: .5rem;
+    background-color: var(--light);
+    color: white;
+    font-size: large;
+}
+
+#new-field-btn:active {
+    transform: scale(.95);
+}
+
+#submit-cr-btn {
+    border-radius: .5rem;
+    background-color: var(--dark);
+    color: white;
+    font-size: large;
+    display: block;
+    margin: 3rem 0;
+    font-size: x-large;
+    padding: .5rem;
+}
+
+#submit-cr-btn:active {
+    transform: scale(.95);
+}
+
+.error-msg {
+    color: rgb(238, 93, 93);
+}

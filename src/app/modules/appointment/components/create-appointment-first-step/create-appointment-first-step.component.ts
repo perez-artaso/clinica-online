@@ -221,7 +221,7 @@ export class CreateAppointmentFirstStepComponent implements OnInit {
   }
 
   hideAll() {
-    this.showSpecialists = false;
+    this.showSpecialists = true;
     this.showSpecialities = false;
     this.showSpecialistsBySpeciality = false;
     this.showSpecialitiesBySpecialist = false;

@@ -49,7 +49,7 @@ export class AppointmentOfferComponent implements AfterViewInit {
   onSelectedDay(date: Date) {
     
     let _dailyDisponibility: DailyDisponibility = new DailyDisponibility();
-
+    console.log("entered on select day")
     this.disponibilities.forEach(
       (disponibility) => {
 
@@ -62,7 +62,29 @@ export class AppointmentOfferComponent implements AfterViewInit {
 
     if (_dailyDisponibility.day != 0) {
       this.appointmentOffersTimestampBreakdown(date, _dailyDisponibility.from, _dailyDisponibility.to, 30, this.possibleTimes);
+      this.possibleTimes = this.GetFilteredAppointmentOffers(this.possibleTimes);
+      this.displayTimes = true;
     }
+
+  }
+
+  GetFilteredAppointmentOffers(offers: AppointmentOffer[]): AppointmentOffer[] {
+
+    this.appointments.forEach(
+
+      (appointment: Appointment) => {
+        offers.forEach(
+          (offer, i, self) => {
+            if (appointment.timestamp == offer.timestamp && ( appointment.status == 0 || appointment.status == 3)) {
+              offers = self.slice(0, i).concat(self.slice(i+1))
+            }
+          }
+        );
+      }
+
+    );
+
+    return offers;
 
   }
 

@@ -5,7 +5,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'welcome', pathMatch: 'full'
+    path: '', redirectTo: 'clinical-record/state', pathMatch: 'full'
   },
   {
     path: 'welcome', component: WelcomeComponent
@@ -24,6 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'profile', loadChildren: () => import('./modules/profile/profile.module').then( m => m.ProfileModule)
+  },
+  {
+    path: 'clinical-record', loadChildren: () => import ('./modules/clinical-record/clinical-record.module').then( m=> m.ClinicalRecordModule )
   }
 ];
 

@@ -1,5 +1,7 @@
 <div *ngIf="!this.displayTimes" class="row mt-5">
 
+    <h2 style="margin-bottom: 2rem;">Seleccione un día</h2>
+
     <div 
     *ngFor="let possibleDay of this.possibleDays"
     class="alert alert-success col-3 me-2"
@@ -11,6 +13,8 @@
 </div>
 
 <div *ngIf="this.displayTimes" class="row mt-5">
+
+    <h2 style="margin-bottom: 2rem;">Seleccione un horario</h2>
 
     <div 
     *ngFor="let possibleTime of this.possibleTimes"
