@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable, ReplaySubject } from 'rxjs';
-import { MmsState } from 'src/app/models/mms-state';
 import { ProfileImages } from 'src/app/models/profile-images';
 import { SpecialistProfile } from 'src/app/models/specialist-profile';
 import { ProfileImagesService } from 'src/app/services/profile-images.service';

@@ -25,6 +25,12 @@
     background-color: var(--dark);
     color:white;
     font-size: x-large;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bi-trash3-fill:hover{
+    cursor: pointer;   
 }
 
 label {

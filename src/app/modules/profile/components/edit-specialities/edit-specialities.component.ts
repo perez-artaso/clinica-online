@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Disponibility, IInputtedHourEvaluation } from 'src/app/models/disponibility';
 import { SpecialistDisponibility } from 'src/app/models/specialist-disponibility';
+import { SpecialistProfile } from 'src/app/models/specialist-profile';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { SpecialistDisponibilityService } from 'src/app/services/specialist-disponibility.service';
+import { Speciality } from '../../models/speciality';
 
 @Component({
   selector: 'app-edit-specialities',
@@ -13,13 +16,19 @@ export class EditSpecialitiesComponent implements OnInit {
 
   disponibility: Array<Disponibility> = [];
   specialistDisponibility: SpecialistDisponibility = new SpecialistDisponibility();
+  specialistProfile: SpecialistProfile = new SpecialistProfile();
 
   success: boolean = false;
   failure: boolean = false;
 
-  constructor(public disponibilityService: SpecialistDisponibilityService, private auth: AuthService) { }
+  newSpeciality: boolean = false;
+
+  constructor(public disponibilityService: SpecialistDisponibilityService, private auth: AuthService, private profileService: ProfileService) { }
 
   ngOnInit(): void {
+
+    this.specialistProfile = SpecialistProfile.FromLiteralObject(this.auth.GetCurrentUserProfile());
+
     this.disponibilityService.getDisponibilitiesByUID(this.auth.GetCurrentUserProfile().uid).subscribe(
       (d: any) => {
 
@@ -43,6 +52,8 @@ export class EditSpecialitiesComponent implements OnInit {
     }
     
   }
+
+  // Agregar validación por horarios de clinica
 
   isValidHour(hour: string) {
     return Disponibility.validHour(hour).everythingOk;
@@ -88,9 +99,43 @@ export class EditSpecialitiesComponent implements OnInit {
 
   }
 
+  receiveSpeciality(speciality: Speciality) {
+
+    this.newSpeciality = false;
+
+    this.disponibility.push(
+      new Disponibility(speciality.name, [])
+    );
+
+  }
+
+  removeSpeciality(specialityName: string) {
+
+    for ( let i = 0; i < this.disponibility.length; i++ ) {
+
+      if (this.disponibility[i].specialityName == specialityName) {
+        this.disponibility = this.disponibility.slice(0, i).concat(this.disponibility.slice(i+1))
+      }
+
+    }
+    
+  }
+
   confirmDisponibility() {
 
     if (this.validHours()) {
+
+      let specialities: Array<string> = [];
+
+      this.disponibility.forEach(
+        (disp: Disponibility) => {
+          specialities.push(disp.specialityName);
+        }
+      );
+
+      this.specialistProfile.specialities = specialities;
+
+      this.profileService.updateDocument(this.specialistProfile.id, this.specialistProfile.getLiteralObjectRepresentation());
 
       this.specialistDisponibility.disponibilities = this.disponibility;
       this.disponibilityService.updateDocument(this.specialistDisponibility.id, this.specialistDisponibility.getLiteralObjectRepresentation()).then(

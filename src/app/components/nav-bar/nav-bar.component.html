@@ -15,7 +15,13 @@
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/profile/my-profile">Mi Perfil</a>
           </li>
           <li *ngIf="this.profile.role == 1" class="nav-item">
-            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="profile/specialities">Mis Especialidades</a>
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/profile/specialities">Mis Especialidades</a>
+          </li>
+          <li *ngIf="this.profile.role == 1" class="nav-item">
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/clinical-record/list">Mis Pacientes</a>
+          </li>
+          <li *ngIf="this.profile.role == 0" class="nav-item">
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/clinical-record/state">Mi Historia Clínica</a>
           </li>
           <li *ngIf="this.profile.role == 0 || this.profile.role == 1" class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/appointments/panel">Mis Turnos</a>
@@ -30,7 +36,13 @@
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/admin/new-user">Nuevo Usuario</a>
           </li>
           <li *ngIf="this.profile.role == 2" class="nav-item">
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/admin/list-users">Usuarios</a>
+          </li>
+          <li *ngIf="this.profile.role == 2" class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/admin/specialists">Especialistas</a>
+          </li>
+          <li *ngIf="this.profile.role == 2" class="nav-item">
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/clinical-record/list">Historias Clinicas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" (click)="this.LogOut()">Logout</a>

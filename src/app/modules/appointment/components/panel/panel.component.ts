@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { first } from 'rxjs';
 import { Appointment } from 'src/app/models/appointment';
 import { IActionRequest } from 'src/app/models/iaction-requested';
+import { IClinicalRecord } from 'src/app/models/iclinical-record';
 import { Profile } from 'src/app/models/profile';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ClinicalRecordService } from 'src/app/services/clinical-record.service';
 import { DateService } from 'src/app/services/date.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -18,7 +20,13 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class PanelComponent implements OnInit {
 
   userProfile: Profile = new Profile();
+
   appointments: Appointment[] = [];
+  appointmentsBackup: Appointment[] = [];
+
+  clinicalRecords: IClinicalRecord[] = [];
+
+  profiles: any[] = [];
 
   revealCancelationMessageInput: boolean = false;
   revealCalificationInput: boolean = false;
@@ -30,7 +38,7 @@ export class PanelComponent implements OnInit {
 
   comment: string = "";
 
-  constructor(private auth: AuthService, private profileService: ProfileService, public dates: DateService, private appointmentService: AppointmentService, private loading: LoadingService) {
+  constructor(private router: Router, private auth: AuthService, private profileService: ProfileService, private clinicalRecordService: ClinicalRecordService, public dates: DateService, private appointmentService: AppointmentService, private loading: LoadingService) {
     
   }
 
@@ -38,6 +46,7 @@ export class PanelComponent implements OnInit {
     
     this.userProfile = this.auth.GetCurrentUserProfile();
     this.loadAppointments();
+    this.getProfiles();
 
   }
 
@@ -46,6 +55,7 @@ export class PanelComponent implements OnInit {
     this.appointmentService.getAppointmentsByPatientId(idPatient).pipe(first()).subscribe(
       (a: Appointment[]) => { 
         this.appointments = Appointment.parseArrayOfLiteralObjectsToInstances(a);
+        this.appointmentsBackup = Appointment.parseArrayOfLiteralObjectsToInstances(a);
       }
     );
 
@@ -56,6 +66,7 @@ export class PanelComponent implements OnInit {
     this.appointmentService.getAppointmentsBySpecialistId(idSpecialist).pipe(first()).subscribe(
       (a: Appointment[]) => { 
         this.appointments = Appointment.parseArrayOfLiteralObjectsToInstances(a);
+        this.appointmentsBackup = Appointment.parseArrayOfLiteralObjectsToInstances(a);
       }
     );
 
@@ -65,6 +76,23 @@ export class PanelComponent implements OnInit {
     this.appointmentService.getDocuments().subscribe(
       (a: Appointment[]) => { 
         this.appointments = Appointment.parseArrayOfLiteralObjectsToInstances(a);
+        this.appointmentsBackup = Appointment.parseArrayOfLiteralObjectsToInstances(a);
+      }
+    );
+  }
+
+  getClinicalRecords() {
+    this.clinicalRecordService.getDocuments().subscribe(
+      (crs: IClinicalRecord[]) => {
+        this.clinicalRecords = crs;
+      }
+    );
+  }
+
+  getProfiles() {
+    this.profileService.getDocuments().subscribe(
+      (p) => {
+        this.profiles = p
       }
     );
   }
@@ -76,11 +104,221 @@ export class PanelComponent implements OnInit {
       break;
       case 1:
         this.getSpecialistAppointments(this.userProfile.uid);
+        this.getClinicalRecords();
       break;
       case 2:
         this.getAppointments();
+        this.getClinicalRecords();
       break;
     }
+  }
+
+  filter(filterElement: HTMLInputElement) {
+
+    const dateManager = new Date();
+    
+    if (filterElement.value != "") {
+
+      let filteredAppointments: Appointment[] = [];
+
+      let valueToSearch: string = "";
+      let keyToSearch: string = "";
+  
+      const splittedKey: string[] = filterElement.value.split(":");
+      
+      if (splittedKey.length > 1 && isNaN(Number(splittedKey[0]))) {
+        valueToSearch = splittedKey[1];
+        keyToSearch = splittedKey[0];
+      } else {
+        valueToSearch = filterElement.value;
+      }
+  
+      if (this.userProfile.role == 1 || this.userProfile.role == 2) {
+  
+        this.clinicalRecords.forEach(
+          (cr: IClinicalRecord) => {
+  
+            let property: keyof typeof cr;
+  
+            for (property in cr) {
+  
+              if (keyToSearch == "") {
+                
+                if ( cr[property].toString().toLowerCase().includes(valueToSearch.toLowerCase()) ) {
+  
+                  this.appointmentsBackup.forEach (
+  
+                    (appointment: Appointment) => {
+  
+                      if (appointment.idPatient == cr['uid']) {
+  
+                        if (!filteredAppointments.includes(appointment)) {
+                          filteredAppointments.push(appointment);
+                        }
+  
+                      }
+  
+                    }
+  
+                  );
+  
+                }
+  
+              } else {
+                
+                if ( cr[property].toString().toLowerCase().includes(valueToSearch.toLowerCase()) && property.toLowerCase().includes(keyToSearch.toLowerCase()) ) {
+
+                  this.appointmentsBackup.forEach (
+                    (appointment: Appointment) => {
+
+                      if (appointment.idPatient == cr['uid']) {
+  
+                        if (!filteredAppointments.includes(appointment)) {
+                          filteredAppointments.push(appointment);
+                        }
+  
+                      }
+  
+                    }
+                  );
+  
+                }
+  
+              }
+  
+            }
+  
+          }
+        );
+  
+      }
+
+      this.profiles.forEach(
+        (prof: any) => {
+
+          let property: keyof typeof prof;
+
+          for (property in prof) {
+
+            if (keyToSearch == "") {
+              
+              if ( prof[property].toString().toLowerCase().includes(valueToSearch.toLowerCase()) ) {
+
+                this.appointmentsBackup.forEach (
+
+                  (appointment: Appointment) => {
+
+                    if (
+                      (appointment.idPatient == prof['uid'] && (this.userProfile.role == 1 || this.userProfile.role == 2)) 
+                      || 
+                      (appointment.idSpecialist == prof['uid'] && this.userProfile.role == 0)
+                    ) {
+
+                      if (!filteredAppointments.includes(appointment)) {
+                        filteredAppointments.push(appointment);
+                      }
+
+                    }
+
+                  }
+
+                );
+
+              }
+
+            } else {
+              
+              if ( prof[property].toString().toLowerCase().includes(valueToSearch.toLowerCase()) && property.toLowerCase().includes(keyToSearch.toLowerCase()) ) {
+
+                this.appointmentsBackup.forEach (
+                  (appointment: Appointment) => {
+
+                    if (
+                      (appointment.idPatient == prof['uid'] && (this.userProfile.role == 1 || this.userProfile.role == 2)) 
+                      || 
+                      (appointment.idSpecialist == prof['uid'] && this.userProfile.role == 0)
+                    ) {
+
+                      if (!filteredAppointments.includes(appointment)) {
+                        filteredAppointments.push(appointment);
+                      }
+
+                    }
+
+                  }
+                );
+
+              }
+
+            }
+
+          }
+
+        }
+      );
+
+      this.appointmentsBackup.forEach(
+  
+        (appointment: Appointment)=> {
+  
+          let property: keyof typeof appointment;
+  
+          for ( property in appointment ) {
+  
+            if (keyToSearch == "") { 
+  
+              if (
+                appointment[property].toString().toLowerCase().includes(valueToSearch.toLowerCase())
+                ||
+                (
+                  property == 'timestamp' 
+                  && 
+                  dateManager.setTime(Number(appointment[property])) 
+                  && 
+                  (
+                    dateManager.toLocaleDateString().toLowerCase().includes(valueToSearch.toLowerCase())
+                    ||
+                    dateManager.toLocaleTimeString().toLowerCase().includes(valueToSearch.toLowerCase())
+                  )
+                )
+              ) {
+
+                if (!filteredAppointments.includes(appointment)) {
+  
+                  filteredAppointments.push(appointment);
+  
+                }
+  
+              }
+  
+            } else {
+  
+              if (appointment[property].toString().toLowerCase().includes(valueToSearch.toLowerCase()) && property.toLowerCase().includes(keyToSearch.toLowerCase())) {
+  
+                if (!filteredAppointments.includes(appointment)) {
+  
+                  filteredAppointments.push(appointment);
+  
+                }
+  
+              }
+  
+            }
+  
+          }
+  
+        }
+  
+      );
+  
+      this.appointments = filteredAppointments;
+
+    } else {
+
+      this.appointments = this.appointmentsBackup;
+
+    }
+
   }
 
   setComment(messageEvent: any) {
@@ -187,6 +425,18 @@ export class PanelComponent implements OnInit {
     )
 
     this.revealCancelationMessageInput = false;
+
+    if (this.selectedAppointment.status == 4) {
+
+      var navigateTo = '/clinical-record/state';
+
+      var navigationExtras = {
+        queryParams: { uid: this.selectedAppointment.idPatient },
+        replaceUrl: true
+      };
+
+      this.router.navigate([navigateTo], navigationExtras);
+    }
 
   }
 

@@ -9,7 +9,8 @@ const routes: Routes = [
     children: [
       {
         path: 'my-profile',
-        component: MyProfileComponent
+        component: MyProfileComponent,
+        data: {animation: "Profile"}
       },
       {
         path: "specialities",

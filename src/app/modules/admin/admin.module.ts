@@ -5,12 +5,14 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { SpecialistManagementComponent } from './components/specialist-management/specialist-management.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
 import { RegisterModule } from '../register/register.module';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 
 @NgModule({
   declarations: [
     SpecialistManagementComponent,
-    NewUserComponent
+    NewUserComponent,
+    ListUsersComponent
   ],
   imports: [
     CommonModule,

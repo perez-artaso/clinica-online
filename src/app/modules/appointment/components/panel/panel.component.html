@@ -1,5 +1,12 @@
 <div class="panel-container">
-    <h1 id="title">Turnos</h1>
+
+    <div id="title_and_filter">
+        <h1 id="title">Turnos</h1>
+        <div id="filter-input-container">
+            Filtro
+            <input id="filter-input" type="text" #filterInput (keyup)="this.filter(filterInput)">
+        </div>
+    </div>    
 
     <div id="appointment-cards-container">
 

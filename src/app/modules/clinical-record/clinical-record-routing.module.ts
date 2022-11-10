@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CrStateComponent } from './components/cr-state/cr-state.component';
+import { ListCrsComponent } from './components/list-crs/list-crs.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,10 @@ const routes: Routes = [
       {
         path: 'state',
         component: CrStateComponent
+      },
+      {
+        path: 'list',
+        component: ListCrsComponent
       }
     ]
   }

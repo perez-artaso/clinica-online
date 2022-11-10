@@ -1,0 +1,34 @@
+<div class="container pt-5">
+    <table class="table table-striped">
+        <thead>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+                Contacto
+            </th>
+            <th>
+                Historia Clínica
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let patient of this.myPatients">
+                <td>
+                    {{ patient.name + " " + patient.last_name }}
+                </td>
+                <td>
+                    {{ patient.age }}
+                </td>
+                <td>
+                    {{ patient.user_email }}
+                </td> 
+                <td>
+                    <i (click)="this.navigateToCr(patient.uid)" class="bi bi-folder2"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

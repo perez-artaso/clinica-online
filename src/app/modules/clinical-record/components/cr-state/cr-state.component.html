@@ -1,84 +1,133 @@
-
+<div class="container pt-5">
+        
     <h1>Historia Clínica</h1>
 
-    <div [formGroup]="this.crForm" class="row">
-    
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label for="height">
-                    Altura (cm)
-                </label>
-                <input formControlName="height" type="number" id="height" class="form-control">
-                <div *ngIf="this.crForm.controls['height'].touched">
-                    <small *ngIf="this.crForm.controls['height'].hasError('min')" class="error-msg">La altura no puede ser inferior a 1 cm</small>
-                    <small *ngIf="this.crForm.controls['height'].hasError('max')" class="error-msg">La altura no puede ser superior a 300 cm</small>
-                    <small *ngIf="this.crForm.controls['height'].hasError('required')" class="error-msg">La altura es requerida</small>
-                </div>         
+    <div class="row">
+        <div class="col-6">    
+            <div [formGroup]="this.crForm" class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="height">
+                            Altura (cm)
+                        </label>
+                        <input formControlName="height" type="number" id="height" class="form-control">
+                        <div *ngIf="this.crForm.controls['height'].touched">
+                            <small *ngIf="this.crForm.controls['height'].hasError('min')" class="error-msg">La altura no puede ser inferior a 1 cm</small>
+                            <small *ngIf="this.crForm.controls['height'].hasError('max')" class="error-msg">La altura no puede ser superior a 300 cm</small>
+                            <small *ngIf="this.crForm.controls['height'].hasError('required')" class="error-msg">La altura es requerida</small>
+                        </div>         
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="weight">
+                            Peso (kg)
+                        </label>
+                        <input formControlName="weight" type="number" id="weight" class="form-control">
+                        <div *ngIf="this.crForm.controls['weight'].touched">
+                            <small *ngIf="this.crForm.controls['weight'].hasError('min')" class="error-msg">El peso no puede ser inferior a 1 kg</small>
+                            <small *ngIf="this.crForm.controls['weight'].hasError('max')" class="error-msg">El peso no puede ser superior a 300 kg</small>
+                            <small *ngIf="this.crForm.controls['weight'].hasError('required')" class="error-msg">El peso es requerido</small>
+                        </div>  
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="temperature">
+                            Temperatura (c°)
+                        </label>
+                        <input formControlName="temperature" type="number" id="temperature" class="form-control">
+                        <div *ngIf="this.crForm.controls['temperature'].touched">
+                            <small *ngIf="this.crForm.controls['temperature'].hasError('min')" class="error-msg">La temperatura no puede ser inferior a 1 C°</small>
+                            <small *ngIf="this.crForm.controls['temperature'].hasError('max')" class="error-msg">La temperatura no puede ser superior a 100 C°</small>
+                            <small *ngIf="this.crForm.controls['temperature'].hasError('required')" class="error-msg">La temperatura es requerida</small>
+                        </div>  
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="bloodPressure">
+                            Presión Arterial (sist/diast)
+                        </label>
+                        <input formControlName="bloodPressure" type="text" id="bloodPressure" class="form-control">
+                        <div *ngIf="this.crForm.controls['bloodPressure'].touched">
+                            <small *ngIf="this.crForm.controls['bloodPressure'].hasError('pattern')" class="error-msg">Error de formato. Se espera: ps/pd (Ej, 10/6)</small>
+                            <small *ngIf="this.crForm.controls['bloodPressure'].hasError('required')" class="error-msg">La presión es requerida</small>
+                        </div>  
+                    </div>
+                </div>
+
             </div>
+
         </div>
-    
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label for="weight">
-                    Peso (kg)
-                </label>
-                <input formControlName="weight" type="number" id="weight" class="form-control">
-                <div *ngIf="this.crForm.controls['weight'].touched">
-                    <small *ngIf="this.crForm.controls['weight'].hasError('min')" class="error-msg">El peso no puede ser inferior a 1 kg</small>
-                    <small *ngIf="this.crForm.controls['weight'].hasError('max')" class="error-msg">El peso no puede ser superior a 300 kg</small>
-                    <small *ngIf="this.crForm.controls['weight'].hasError('required')" class="error-msg">El peso es requerido</small>
-                </div>  
-            </div>
+
+        <div class="col-6">
+            <h3>Historial de atenciones</h3>
+            <table class="table table-striped">
+                <thead>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Especialidad
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let appointment of this.appointments">
+                        <td>
+                            {{ 
+                                this.dateService.getLocaleDateStringByTimestamp(appointment.timestamp) 
+                                +
+                                " "
+                                +
+                                this.dateService.getLocaleTimeStringByTimestamp(appointment.timestamp)
+                            }}
+                        </td>
+                        <td>
+                            {{
+                                appointment.speciality
+                            }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label for="temperature">
-                    Temperatura (c°)
-                </label>
-                <input formControlName="temperature" type="number" id="temperature" class="form-control">
-                <div *ngIf="this.crForm.controls['temperature'].touched">
-                    <small *ngIf="this.crForm.controls['temperature'].hasError('min')" class="error-msg">La temperatura no puede ser inferior a 1 C°</small>
-                    <small *ngIf="this.crForm.controls['temperature'].hasError('max')" class="error-msg">La temperatura no puede ser superior a 100 C°</small>
-                    <small *ngIf="this.crForm.controls['temperature'].hasError('required')" class="error-msg">La temperatura es requerida</small>
-                </div>  
-            </div>
-        </div>
-    
-        <div class="col-lg-3">
-            <div class="form-group">
-                <label for="bloodPressure">
-                    Presión Arterial (sist/diast)
-                </label>
-                <input formControlName="bloodPressure" type="text" id="bloodPressure" class="form-control">
-                <div *ngIf="this.crForm.controls['bloodPressure'].touched">
-                    <small *ngIf="this.crForm.controls['bloodPressure'].hasError('pattern')" class="error-msg">Error de formato. Se espera: ps/pd (Ej, 10/6)</small>
-                    <small *ngIf="this.crForm.controls['bloodPressure'].hasError('required')" class="error-msg">La presión es requerida</small>
-                </div>  
-            </div>
-        </div>
-    
+
     </div>
 
-    
+
     <h2>
         Otros Campos
     </h2>
 
-    <div *ngFor="let newField of this.getMaxDynamicFieldsArrayRepresentation(); let i = index;">
+    <div *ngFor="let dynamicField of this.dynamicFields; let i = index;">
         <div *ngIf="i < this.dynamicFieldsAdded" class="row mb-3">
             <div class="form-group col-3">
                 <label>Dato a guardar</label>
-                <input type="text" class="form-control" [value]="this.dynamicFields[i].key">
+                <input [(ngModel)]="this.dynamicFields[i].key" type="text" class="form-control" [disabled]="this.isPatient">
             </div>
             <div class="form-group col-3">
                 <label>Valor</label>
-                <input type="text" class="form-control" [value]="this.dynamicFields[i].value">
+                <input [(ngModel)]="this.dynamicFields[i].value" type="text" class="form-control" [disabled]="this.isPatient">
             </div>
         </div>
     </div>
 
-    <button *ngIf="this.dynamicFieldsAdded < this.maxDynamicFieldsAllowed" id="new-field-btn" (click)="this.dynamicFieldsAdded = this.dynamicFieldsAdded + 1"><i class="bi bi-plus-square"></i> Nuevo Campo </button>
+    <button *ngIf="this.dynamicFieldsAdded < this.maxDynamicFieldsAllowed && !this.isPatient" id="new-field-btn" (click)="this.dynamicFieldsAdded = this.dynamicFieldsAdded + 1"><i class="bi bi-plus-square"></i> Nuevo Campo </button>
 
+    <button *ngIf="!this.isPatient" id="submit-cr-btn" (click)="this.onSubmitRequest()">Guardar Historia Clínica</button>
 
-    <button id="submit-cr-btn">Guardar Historia Clínica</button>
+    <div style="text-align: center;">
+        <div *ngIf="this.succesfulUpdate" class="alert alert-success feedback-message">
+            <i class="bi bi-check-circle-fill"></i> La historia clínica se guardó correctamente
+        </div>
+        <div *ngIf="this.errorOnUpdate" class="alert alert-danger feedback-message">
+            <i class="bi bi-x-circle-fill"></i> Ha ocurrido un error
+        </div>
+    </div>
+
+</div>

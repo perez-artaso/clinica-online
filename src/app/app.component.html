@@ -1,4 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <app-loading></app-loading>
-<router-outlet></router-outlet>
+<div [@routeAnim]="prepareRoute(outlet)" >
+    <router-outlet #outlet="outlet"></router-outlet>
+</div>
 <app-captcha></app-captcha>

@@ -1,0 +1,16 @@
+<div class="speciality-selector-container">
+    <div class="speciality-selector">
+        <div id="speciality-pool">
+            <div *ngFor="let speciality of this.specialities" class="speciality" (click)="this.emmitSpeciality(speciality)">
+                {{ speciality.name }}
+            </div>
+        </div>
+        <p id="new-speciality-label">Si no encuentra su especialidad entre las listadas arriba, agreguela a continuación.</p>
+        <div id="new-speciality">
+            <div class="form-group">
+                <input type="text" class="form-control" name="new-speciality-field" id="new-speciality-field" [(ngModel)]="this.newSpeciality">
+            </div>
+            <button id="new-speciality-btn" class="btn btn-large form-control" (click)="this.emmitNewSpeciality()">Nueva Esp.</button>
+        </div>
+    </div>
+</div>

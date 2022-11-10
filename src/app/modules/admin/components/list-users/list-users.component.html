@@ -1,0 +1,31 @@
+ <div style="margin: auto; width: 50%; margin-top: 2rem;">   
+    <table #excelTable id="excel-table" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>DNI</th>
+                <th>Rol</th>
+                <th>Email</th>
+                <th>Especialidades</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.id_number}}</td>
+                <td>{{this.getRoleAsString(user.role)}}</td>
+                <td>{{user.user_email}}</td>
+                <td>{{this.getUserSpecialities(user)}}</td>
+              </tr>
+        </tbody>
+      
+      
+    </table>
+
+    <button (click)="exportAsExcel(excelTable)">Exportar plantilla</button>
+  </div>
+   

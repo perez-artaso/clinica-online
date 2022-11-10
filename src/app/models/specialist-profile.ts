@@ -42,6 +42,24 @@ export class SpecialistProfile extends Profile {
         return specialitiesArray;
 
     }
+
+    public static FromLiteralObject(literalObj: any) {
+        let newSpecialist = new SpecialistProfile(
+            literalObj.uid, 
+            literalObj.name, 
+            literalObj.last_name, 
+            literalObj.age, 
+            literalObj.id_number, 
+            literalObj.user_email, 
+            literalObj.role, 
+            literalObj.approved, 
+            literalObj.specialities
+        );
+
+        newSpecialist.setId(literalObj.id);
+
+        return newSpecialist;
+    }
     
 
 }

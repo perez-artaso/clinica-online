@@ -20,6 +20,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MmsDirective } from './directives/mms.directive';
 import { CaptchaComponent } from './components/captcha/captcha.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CaptchaComponent } from './components/captcha/captcha.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     RegisterModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
