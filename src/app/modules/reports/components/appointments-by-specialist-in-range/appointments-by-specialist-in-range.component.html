@@ -1,0 +1,59 @@
+<div class="container" *ngIf="this.display">
+    <div class="row">
+
+        <div class="col-8">
+            <canvas
+                #canvas
+                style="width: 750px; height: 750px;"
+                baseChart
+                [type]="'pie'"
+                [datasets]="pieChartDatasets"
+                [labels]="pieChartLabels"
+                [options]="pieChartOptions"
+                [plugins]="pieChartPlugins"
+                [legend]="pieChartLegend">
+            </canvas>
+            
+            <button class="btn btn-primary" (click)="this.GetBase64FromCanvas(canvas)">Descargar</button>
+
+        </div>
+
+        <div class="col-4">
+            <div [formGroup]="this.dateForm">
+
+                <div class="form-group">
+                    <label> Desde </label>
+                    <input formControlName="from" class="form-control" type="text">
+                    <small style="color: rgb(235, 66, 66)" *ngIf="!this.dateForm.controls['from'].valid && this.dateForm.controls['from'].touched"> El formato esperado es dd/mm/aaaa </small>
+                </div>
+
+                <div class="form-group">
+                    <label> Hasta </label>
+                    <input formControlName="to" class="form-control" type="text">
+                    <small style="color: rgb(235, 66, 66)" *ngIf="!this.dateForm.controls['to'].valid && this.dateForm.controls['to'].touched"> El formato esperado es dd/mm/aaaa </small>
+                </div>
+
+                <div class="row d-flex justify-content-around mt-4">
+
+                    <div style="text-align: center;" class="col-6">
+                        <button [ngClass]="{'opt-selected': !this.finalizedSelected}" (click)="this.finalizedSelected = false" class="my-opt-btn">Solicitados</button>
+                    </div>
+
+                    <div style="text-align: center;" class="col-6">
+                        <button [ngClass]="{'opt-selected': this.finalizedSelected}" (click)="this.finalizedSelected = true" class="my-opt-btn">Realizados</button>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <div style="text-align: center;" class="col-12">
+                        <button (click)="this.onSubmit()" id="my-search-button">Buscar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+</div>

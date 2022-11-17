@@ -1,13 +1,6 @@
-- Crear página "public-register"
-    * varía en base a la opción que se seleccione de tipo de usuario (paciente, especialista)
-
-    * Form Alta Paciente (Componente "new-patient") [listo]
-    * Form Alta Especialista (Componente "new-specialist") 
-    * Service "RegisterService"
-
-    -REGISTRO:
-    * UNA IMAGEN ABAJO DE LA OTRA: SPEC y PACIENTE => botones que carguen el formulario correspondiente.
-    * (dos botones alargados, uno abajo del otro, para mostrar el formulario correspondiente)
-
-- LOGIN
-    * Seis botones cuadrados, 3 pacientes, dos especialistas, 1 admin. [IMAGENES] (Acceso Rapido)
+* Turnos solicitados por médicos en un lapso de tiempo
+    - Appointments where status == 0
+    - Filter: idSpecialist where x < timestamp < y
+* Turnos finalizados por médicos en un lapso de tiempo
+    - Appointments where status == 4
+    - Filter: idSpecialist where x < timestamp < y

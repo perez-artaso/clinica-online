@@ -80,11 +80,11 @@
                     <tr *ngFor="let appointment of this.appointments">
                         <td>
                             {{ 
-                                this.dateService.getLocaleDateStringByTimestamp(appointment.timestamp) 
+                                (appointment.timestamp | toLocaleDate)
                                 +
                                 " "
                                 +
-                                this.dateService.getLocaleTimeStringByTimestamp(appointment.timestamp)
+                                ( appointment.timestamp | toLocaleTime )
                             }}
                         </td>
                         <td>

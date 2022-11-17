@@ -1,0 +1,6 @@
+.report-route {
+    padding: .5rem;
+    background-color: var(--light);
+    border-radius: .4rem;
+    color: white;
+}

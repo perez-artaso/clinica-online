@@ -10,6 +10,8 @@ import { ProfileImagesService } from 'src/app/services/profile-images.service';
 import { ProfileImages } from 'src/app/models/profile-images';
 import { environment } from 'src/environments/environment';
 import { first } from 'rxjs';
+import { LoginLogsService } from 'src/app/services/login-log.service';
+import { LoginLog } from 'src/app/models/login-log';
 
 @Component({
   selector: 'app-login-form',
@@ -31,7 +33,15 @@ export class LoginFormComponent implements OnInit {
 
   @Output('registerRequest') registerEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private auth: AuthService, private router: Router, private profileService: ProfileService, private navBarService: NavbarService, private loadingService: LoadingService, public profileImages: ProfileImagesService) { }
+  constructor(
+    private auth: AuthService, 
+    private router: Router, 
+    private profileService: ProfileService, 
+    private navBarService: NavbarService, 
+    private loadingService: LoadingService, 
+    public profileImages: ProfileImagesService,
+    private loginLogService: LoginLogsService
+  ) { }
 
   ngOnInit(): void {
 
@@ -85,6 +95,10 @@ export class LoginFormComponent implements OnInit {
                       this.router.navigate(["/home"]);
                       this.navBarService.showNavbar();
 
+                      this.loginLogService.addDocument(
+                        new LoginLog(user_id, Date.now().toString()).getLiteralObjectRepresentation()
+                      );
+
                     } else {
 
                       this.loadingService.loadingEnd();
@@ -96,6 +110,10 @@ export class LoginFormComponent implements OnInit {
 
                     this.router.navigate(["/home"]);
                     this.navBarService.showNavbar();
+
+                    this.loginLogService.addDocument(
+                      new LoginLog((user_id as string), Date.now().toString()).getLiteralObjectRepresentation()
+                    );
 
                   }
 

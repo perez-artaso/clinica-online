@@ -9,6 +9,7 @@
                 <th>Rol</th>
                 <th>Email</th>
                 <th>Especialidades</th>
+                <th>Historial de Atenciones</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,12 @@
                 <td>{{this.getRoleAsString(user.role)}}</td>
                 <td>{{user.user_email}}</td>
                 <td>{{this.getUserSpecialities(user)}}</td>
+                <td>
+                    <div>
+                        <img style="margin-right: .5rem" [src]="this.getUserProfileImageByUid(user.uid)" (click)="exportAppointmentsByPatientAsXlsx(appointmentsByPatientTable, user)"> 
+                        {{ user.name + " " + user.last_name }}
+                    </div>             
+                </td>
               </tr>
         </tbody>
       
@@ -28,4 +35,39 @@
 
     <button (click)="exportAsExcel(excelTable)">Exportar plantilla</button>
   </div>
-   
+
+<table #appointmentsByPatientTable id="appointmentsByPatientTable" class="table table-striped" style="visibility: hidden">
+    <thead>
+        <tr>
+            <th>Especialista</th>
+            <th>Especialidad</th>
+            <th>Fecha</th>
+            <th>Observaciones Especialista</th>
+            <th>Comentarios Paciente</th>
+            <th>Calificación De La Atención</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let appointment of appointmentsByPatient">
+
+            <td>{{this.getUserFullNameByUid(appointment.idSpecialist)}}</td>
+
+            <td>{{appointment.speciality}}</td>
+
+            <td>
+                {{
+                    this.dateService.getLocaleDateStringByTimestamp(appointment.timestamp) 
+                    + " " 
+                    + this.dateService.getLocaleTimeStringByTimestamp(appointment.timestamp)
+                }}
+            </td>
+
+            <td>{{appointment.specialistCommentary}}</td>
+
+            <td>{{appointment.patientComentary}}</td>
+            
+            <td>{{(appointment.calification == 0 ? "-" : appointment.calification)}}</td>
+
+        </tr>
+    </tbody>  
+</table>

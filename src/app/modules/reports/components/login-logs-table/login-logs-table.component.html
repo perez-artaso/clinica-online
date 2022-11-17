@@ -1,0 +1,30 @@
+<div class="container">
+    <table #table class="table striped-table mt-4">
+        <thead>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let loginLog of this.loginLogs">
+
+                <td>
+                    {{ this.reportService.GetSpecialistFullNameByUid(loginLog.uid) }}
+                </td>
+
+                <td>
+                    {{ this.dateService.getLocaleDateStringByTimestamp(loginLog.timestamp) }}
+                </td>
+
+                <td>
+                    {{ this.dateService.getLocaleTimeStringByTimestamp(loginLog.timestamp) }}
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary" (click)="this.exportAsExcel(table)">Descargar</button>
+
+
+</div>

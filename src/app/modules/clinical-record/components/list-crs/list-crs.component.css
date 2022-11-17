@@ -1,3 +1,11 @@
 i:hover {
     cursor: pointer;
 }
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card:active {
+    transform: scale(.95);
+}

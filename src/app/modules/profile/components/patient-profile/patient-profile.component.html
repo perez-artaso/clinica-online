@@ -121,7 +121,7 @@
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="user_email">
-                    De
+                    Email
                     <i 
                     #editEmail 
                     (click)="this.editFieldRequest(editEmail, confirmEmail, cancelEmail, 'user_email')"
@@ -143,6 +143,32 @@
             </div>
         </div>
 
+        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+            <div class="form-group">
+                <label for="specialities-btn"></label>
+                <button (click)="this.revealSpecialities = true;"  id="specialities-btn" class="form-control" name="specialities-btn">
+                    <i (click)="this.revealSpecialities = true" class="bi bi-file-earmark-pdf-fill"></i> Mis Atenciones
+                </button>
+            </div>
+        </div>
+
     </div>
 
+</div>
+
+<div *ngIf="this.revealSpecialities" id="modal-container">
+    <div id="modal-content">
+        <h2 style="text-align: center;">Especialidad</h2>
+        <div id="speciality-pool">
+            <div 
+            *ngFor="let speciality of this.getSpecialitiesRecord()" 
+            class="speciality"
+            (click)="this.exportAppointmentsReportBySpeciality(speciality)">
+                {{ speciality }}
+            </div>
+        </div>
+
+        <button style="width: 100%; margin-top: .5rem;" class="btn btn-danger" (click)="this.revealSpecialities = false;">Cancelar</button>
+
+    </div>
 </div>

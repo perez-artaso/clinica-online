@@ -5,6 +5,7 @@ import { Appointment } from 'src/app/models/appointment';
 import { Profile } from 'src/app/models/profile';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DateService } from 'src/app/services/date.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -15,8 +16,9 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class ListCrsComponent implements OnInit {
 
   myPatients: Profile[] = [];
+  myAppointments: Appointment[] = [];
 
-  constructor(private appointmentService: AppointmentService, private profileService: ProfileService, private auth: AuthService, private router: Router) { }
+  constructor(private appointmentService: AppointmentService, private profileService: ProfileService, private auth: AuthService, private router: Router, public dateService: DateService) { }
 
   ngOnInit(): void {
     const specialistId = this.auth.GetCurrentUserID()
@@ -27,6 +29,9 @@ export class ListCrsComponent implements OnInit {
         this.appointmentService.getAppointmentsBySpecialistId(specialistId).subscribe(
           (appointments: Appointment[]) => {
             let patientsIds: string[] = [];
+
+            this.myAppointments = appointments;
+            this.myAppointments.sort( (a, b) =>  Number(b.timestamp) - Number(a.timestamp) );
             
             appointments.forEach(
               (appointment) => {
@@ -80,6 +85,30 @@ export class ListCrsComponent implements OnInit {
     }
 
     
+
+  }
+
+  getLastAppointmentsByPatientId(patientId: string, maxAmount: number) {
+
+    let retArray: Appointment[] = [];
+    let appointmentsFound = 0;
+
+    for (let i = 0; i < this.myAppointments.length; i++) {
+
+      if( appointmentsFound < maxAmount ) {
+      
+        if (this.myAppointments[i].status == 4 && this.myAppointments[i].idPatient == patientId) {
+
+          retArray.push(this.myAppointments[i]);
+          appointmentsFound++;
+
+        }
+
+      } else break;
+
+    }
+
+    return retArray;
 
   }
 

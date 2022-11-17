@@ -21,6 +21,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { MmsDirective } from './directives/mms.directive';
 import { CaptchaComponent } from './components/captcha/captcha.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
+import { ClickableDirective } from './directives/clickable.directive';
+import { ToLocaleDatePipe } from './pipes/to-locale-date.pipe';
+import { ToLocaleTimePipe } from './pipes/to-locale-time.pipe';
+import { AdminMessagePipe } from './pipes/admin-message.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoadingComponent,
     HomeComponent,
     MmsDirective,
-    CaptchaComponent
+    CaptchaComponent,
+    ClickableDirective,
+    ToLocaleDatePipe,
+    ToLocaleTimePipe,
+    AdminMessagePipe
   ],
   imports: [
     BrowserModule,
@@ -43,7 +52,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     AngularFirestoreModule,
     RegisterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

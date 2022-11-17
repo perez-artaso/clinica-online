@@ -6,13 +6,15 @@ import { SpecialistManagementComponent } from './components/specialist-managemen
 import { NewUserComponent } from './components/new-user/new-user.component';
 import { RegisterModule } from '../register/register.module';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 
 @NgModule({
   declarations: [
     SpecialistManagementComponent,
     NewUserComponent,
-    ListUsersComponent
+    ListUsersComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,

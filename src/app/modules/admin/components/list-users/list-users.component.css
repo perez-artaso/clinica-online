@@ -4,3 +4,17 @@ button {
     background-color: var(--dark);
     color: white;
 }
+
+img {
+    border-radius: 100%;
+    max-width: 3rem;
+    box-shadow: black .3rem .3rem;
+}
+
+img:active {
+    transform: scale(.95);
+}
+
+img:hover {
+    cursor: pointer;
+}

@@ -27,6 +27,9 @@ const routes: Routes = [
   },
   {
     path: 'clinical-record', loadChildren: () => import ('./modules/clinical-record/clinical-record.module').then( m=> m.ClinicalRecordModule )
+  },
+  {
+    path: 'reports', loadChildren: () => import('./modules/reports/reports.module').then( m => m.ReportsModule )
   }
 ];
 

@@ -7,6 +7,16 @@ import { ProfileImages } from 'src/app/models/profile-images';
 import { ProfileImagesService } from 'src/app/services/profile-images.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { environment } from 'src/environments/environment';
+import { AppointmentService } from 'src/app/services/appointment.service';
+import { Appointment } from 'src/app/models/appointment';
+
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { DateService } from 'src/app/services/date.service';
+
+interface IPdfMake{ vfs: { [file: string]: string }  }
+
+(pdfMake as IPdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-patient-profile',
@@ -18,6 +28,9 @@ export class PatientProfileComponent implements OnInit {
   @Input('profile') profile: Profile = new Profile();
   @Input('profileImages') profileImages: ProfileImages = new ProfileImages();
 
+  myAppointments: Array<Appointment> = [];
+  userProfiles: any[] = [];
+
   patientProfileForm: FormGroup = new FormGroup({
 
     name: new FormControl('', Validators.required),
@@ -26,18 +39,43 @@ export class PatientProfileComponent implements OnInit {
     id_number: new FormControl('', Validators.compose([Validators.required, Validators.pattern(/[0-9]{1,3}\.[0-9]{3}\.[0-9]{3}/)])),
     user_email: new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])),
 
-  })
+  });
+
+  revealSpecialities: boolean = false;
 
   uploadImageErrorOcurred: boolean = false;
 
   profileImageUrl: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer, private profiles: ProfileService, private imagesService: ProfileImagesService) {
+  constructor(
+    private sanitizer: DomSanitizer, 
+    private profiles: ProfileService, 
+    private imagesService: ProfileImagesService, 
+    private appointmentService: AppointmentService, 
+    private dateService: DateService) {
     this.profileImageUrl = this.getSanitizedSrc(environment.templateImg);
   }
 
   ngOnInit(): void {
+
     this.disableFields();
+
+    this.appointmentService.getAppointmentsByPatientId(this.profile.uid).subscribe(
+      
+      (appointments: Appointment[]) => {
+        appointments.forEach(
+          (a: Appointment) => {
+            if (a.status == 4 && !this.myAppointments.includes(a)) this.myAppointments.push(a)
+          }
+        )
+      }
+
+    );
+
+    this.profiles.getDocuments().subscribe(
+      (ps: any[]) => this.userProfiles = ps
+    );
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,6 +98,83 @@ export class PatientProfileComponent implements OnInit {
       this.patientProfileForm.controls['user_email'].setValue(changes.profile.currentValue.user_email);
 
     }
+
+  }
+
+  getSpecialistFullNameByUid(uid: string) {
+    let retStr = "";
+    for (let i = 0; i < this.userProfiles.length; i++) {
+      if(this.userProfiles[i].uid == uid) {
+        retStr = this.userProfiles[i].name + " " + this.userProfiles[i].last_name
+      }
+    }
+    return retStr;
+  }
+
+  exportAppointmentsReportBySpeciality(speciality: string) {
+
+    let appointmentsOrderedList = {
+      ol: [
+
+      ]
+    };
+
+    this.myAppointments.forEach(
+      (a: Appointment) => {
+        if (a.speciality == speciality) {
+          (appointmentsOrderedList.ol as any[]).push(
+            {
+              ul: [
+                "Especialista: " + this.getSpecialistFullNameByUid(a.idSpecialist),
+                "Fecha: " + this.dateService.getLocaleDateStringByTimestamp(a.timestamp) + " " + this.dateService.getLocaleTimeStringByTimestamp(a.timestamp),
+                "Duración: " + a.duration + " minutos",
+                "Comentarios del especialista: " + a.specialistCommentary
+              ],
+              margin: [0, 11]
+            }
+          )
+        }
+      }
+    ); 
+
+    const pdfDefintition: any = {
+      content: [
+        {
+          image: 'data:image/jpg;base64,' + environment.clinicLogo,
+          width: 200,
+          height: 200,
+          alignment: 'center'
+        },
+        {
+          text: speciality,
+          fontSize: 22,
+          bold: true,
+          margin: [0, 11]
+        },
+        appointmentsOrderedList
+      ]
+    }
+
+    const pdf = pdfMake.createPdf(pdfDefintition);
+    pdf.open();
+
+    this.revealSpecialities = false;
+
+  }
+
+  getSpecialitiesRecord(): Array<string> {
+    
+    let filteredSpecialities: string[] = [];
+
+    this.myAppointments.forEach(
+
+      (a: Appointment) => {
+        if (!filteredSpecialities.includes(a.speciality)) filteredSpecialities.push(a.speciality)
+      }
+
+    );
+
+    return filteredSpecialities;
 
   }
 

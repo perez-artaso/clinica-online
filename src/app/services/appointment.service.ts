@@ -39,5 +39,9 @@ export class AppointmentService {
     return this.firestore.collection(this.collectionPath, ref => ref.where("idPatient", "==", uid)).valueChanges({idField: 'id'});
   }
 
+  public getAppointmentsByStatus(status: number): any {
+    return this.firestore.collection(this.collectionPath, ref => ref.where("status", "==", status)).valueChanges({idField: 'id'});
+  }
+
 
 }

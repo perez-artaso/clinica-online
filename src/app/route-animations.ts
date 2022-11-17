@@ -27,26 +27,32 @@ export const fader = trigger('routeAnim', [
 
       query(':enter', [
         style({
-          transform: "scale(0)"
+          opacity: '0'
         })
       ], {optional: true}),
 
-    
-      query(':leave', [
-        style({display: 'block'}),
-        animate(1000, style({
-          transform: "scale(0)"
-        }))
-      ], {optional: true}),
-
-      query(':enter', [
-        animate(
-          1000,
+      group([
+        query(':leave', [
+          style({display: 'block'}),
+          animate(1000, style({
+            transform: "translateY(-200px) scale(0)",
+            opacity: '0'
+          }))
+        ], {optional: true}),
+  
+        query(':enter', [
           style({
-            transform: "scale(1)"
-          })
-        )
-      ], {optional: true})
+            transform: 'translateY(100%) scale(0)'
+          }),
+          animate(
+            1000,
+            style({
+              transform: 'translateX(0) scale(1)',
+              opacity: '1'
+            })
+          )
+        ], {optional: true})
+      ])
       
 
     
@@ -77,14 +83,14 @@ export const fader = trigger('routeAnim', [
         query(':leave', [
           style({display: 'block'}),
           animate(1000, style({
-            transform: "translateX(-80px)",
+            transform: "translateY(-200px)",
             opacity: '0'
           }))
         ], {optional: true}),
   
         query(':enter', [
           style({
-            transform: 'translateX(80px)'
+            transform: 'translateY(100%)'
           }),
           animate(
             1000,

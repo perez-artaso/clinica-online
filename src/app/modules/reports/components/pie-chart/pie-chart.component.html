@@ -1,0 +1,17 @@
+<div class="container" *ngIf="this.display">
+    <canvas
+    #canvas
+    style="width: 750px; height: 750px;"
+    baseChart
+    [type]="'pie'"
+    [datasets]="pieChartDatasets"
+    [labels]="pieChartLabels"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+
+  <button class="btn btn-primary" (click)="this.GetBase64FromCanvas(canvas)">Descargar</button>
+
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReportService } from 'src/app/modules/reports/services/report.service';
 
 @Component({
   selector: 'app-home',

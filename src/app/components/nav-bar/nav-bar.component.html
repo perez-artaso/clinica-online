@@ -44,6 +44,9 @@
           <li *ngIf="this.profile.role == 2" class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/clinical-record/list">Historias Clinicas</a>
           </li>
+          <li *ngIf="this.profile.role == 2" class="nav-item">
+            <a class="nav-link active nav-link-customization" aria-current="page" routerLink="/admin/reports">Reportes</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link active nav-link-customization" aria-current="page" (click)="this.LogOut()">Logout</a>
           </li>

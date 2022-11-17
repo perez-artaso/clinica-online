@@ -1,0 +1,15 @@
+.my-opt-btn {
+    padding: .4rem;
+    color: white;
+    background-color: var(--light);
+}
+
+#my-search-button {
+    padding: .4rem;
+    color: white;
+    background-color: var(--dark);
+}
+
+.opt-selected {
+    transform: scale(.9);
+}
