@@ -5,6 +5,7 @@ import { Appointment } from 'src/app/models/appointment';
 import { IActionRequest } from 'src/app/models/iaction-requested';
 import { IClinicalRecord } from 'src/app/models/iclinical-record';
 import { Profile } from 'src/app/models/profile';
+import { AdminMessagePipe } from 'src/app/pipes/admin-message.pipe';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ClinicalRecordService } from 'src/app/services/clinical-record.service';
@@ -38,7 +39,7 @@ export class PanelComponent implements OnInit {
 
   comment: string = "";
 
-  constructor(private router: Router, private auth: AuthService, private profileService: ProfileService, private clinicalRecordService: ClinicalRecordService, public dates: DateService, private appointmentService: AppointmentService, private loading: LoadingService) {
+  constructor(private router: Router, private auth: AuthService, private profileService: ProfileService, private clinicalRecordService: ClinicalRecordService, public dates: DateService, private appointmentService: AppointmentService, private loading: LoadingService, private adminMessagePipe: AdminMessagePipe) {
     
   }
 
@@ -411,7 +412,7 @@ export class PanelComponent implements OnInit {
     } else if (userRole == 1) {
       this.selectedAppointment.specialistCommentary = this.comment;
     } else if (userRole == 2) {
-      this.selectedAppointment.specialistCommentary = "[Mensaje Del Administrador]: " + this.comment;
+      this.selectedAppointment.specialistCommentary = this.adminMessagePipe.transform(this.comment);
     }
     
     this.loading.loadingStart();

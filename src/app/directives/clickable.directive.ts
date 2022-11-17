@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appClickable]'
+  selector: '[appClickable]',
+  standalone: true
 })
 export class ClickableDirective {
 

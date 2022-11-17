@@ -9,6 +9,7 @@ import { MmsDirective } from './directives/mms.directive';
 import { CreateAppointmentFirstStepComponent } from './components/create-appointment-first-step/create-appointment-first-step.component';
 import { AppointmentOfferComponent } from './components/appointment-offer/appointment-offer.component';
 import { AppointmentConfirmationComponent } from './components/appointment-confirmation/appointment-confirmation.component';
+import { AdminMessagePipe } from 'src/app/pipes/admin-message.pipe';
 
 
 @NgModule({
@@ -24,6 +25,9 @@ import { AppointmentConfirmationComponent } from './components/appointment-confi
   imports: [
     CommonModule,
     AppointmentRoutingModule
+  ],
+  providers: [
+    AdminMessagePipe
   ]
 })
 export class AppointmentModule { }

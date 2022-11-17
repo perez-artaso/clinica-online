@@ -12,7 +12,9 @@ import { fader} from './route-animations';
 })
 export class AppComponent {
 
-  constructor (private contexts: ChildrenOutletContexts) {}
+  constructor (private contexts: ChildrenOutletContexts) {
+
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     if(outlet.isActivated) {

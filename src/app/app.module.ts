@@ -22,7 +22,6 @@ import { MmsDirective } from './directives/mms.directive';
 import { CaptchaComponent } from './components/captcha/captcha.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
-import { ClickableDirective } from './directives/clickable.directive';
 import { ToLocaleDatePipe } from './pipes/to-locale-date.pipe';
 import { ToLocaleTimePipe } from './pipes/to-locale-time.pipe';
 import { AdminMessagePipe } from './pipes/admin-message.pipe';
@@ -39,10 +38,8 @@ import { AdminMessagePipe } from './pipes/admin-message.pipe';
     HomeComponent,
     MmsDirective,
     CaptchaComponent,
-    ClickableDirective,
     ToLocaleDatePipe,
-    ToLocaleTimePipe,
-    AdminMessagePipe
+    ToLocaleTimePipe
   ],
   imports: [
     BrowserModule,
@@ -55,7 +52,8 @@ import { AdminMessagePipe } from './pipes/admin-message.pipe';
     BrowserAnimationsModule,
     NgChartsModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,15 +1,16 @@
 <div class="container">
-    <div style="margin-top: 12rem; display: flex; justify-content: space-evenly;" class="row">
-        <div (click)="this.navigateTo('/reports/login-logs')" class="col-2 report-route">
+    <div style="padding: .4rem;
+    border: 1px solid var(--dark); border-radius: .3rem; width: 30vw; margin: 12rem auto;">
+        <div appClickable (click)="this.navigateTo('/reports/login-logs')" class="report-route">
             Ingresos al sistema
         </div>
-        <div (click)="this.navigateTo('/reports/pie-chart')" class="col-2 report-route">
+        <div appClickable (click)="this.navigateTo('/reports/pie-chart')" class="report-route">
             Turnos por especialidad
         </div>
-        <div (click)="this.navigateTo('reports/bar-chart')" class="col-2 report-route">
+        <div appClickable (click)="this.navigateTo('reports/bar-chart')" class="report-route">
             Turnos por día
         </div>
-        <div (click)="this.navigateTo('reports/appointments-by-specialist')" class="col-2 report-route">
+        <div appClickable (click)="this.navigateTo('reports/appointments-by-specialist')" class="report-route">
             Turnos por especialista
         </div>
     </div>

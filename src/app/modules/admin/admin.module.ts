@@ -7,6 +7,7 @@ import { NewUserComponent } from './components/new-user/new-user.component';
 import { RegisterModule } from '../register/register.module';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { ClickableDirective } from 'src/app/directives/clickable.directive';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReportsComponent } from './components/reports/reports.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    RegisterModule
+    RegisterModule,
+    ClickableDirective
   ]
 })
 export class AdminModule { }
